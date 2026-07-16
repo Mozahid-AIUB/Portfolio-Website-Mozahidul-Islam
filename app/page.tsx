@@ -1,65 +1,242 @@
-import Image from "next/image";
+import Link from "next/link";
+import { Spotlight } from "@/components/Spotlight";
+import { HomeSidebar } from "@/components/HomeSidebar";
+import { Marquee } from "@/components/Marquee";
+import { Reveal } from "@/components/Reveal";
+import { StatusBadge } from "@/components/StatusBadge";
+import { ShowcaseProject } from "@/components/ShowcaseProject";
+import { profile } from "@/data/profile";
+import { featuredProjects } from "@/data/projects";
+import { research } from "@/data/research";
+import { experience } from "@/data/experience";
+import { education } from "@/data/education";
+
+function SectionLabel({ children }: { children: React.ReactNode }) {
+  return (
+    <h2 className="mb-8 font-mono text-xs uppercase tracking-[0.25em] text-amber lg:sr-only">
+      {children}
+    </h2>
+  );
+}
 
 export default function Home() {
   return (
-    <div className="flex flex-col flex-1 items-center justify-center bg-zinc-50 font-sans dark:bg-black">
-      <main className="flex flex-1 w-full max-w-3xl flex-col items-center justify-between py-32 px-16 bg-white dark:bg-black sm:items-start">
-        <Image
-          className="dark:invert"
-          src="/next.svg"
-          alt="Next.js logo"
-          width={100}
-          height={20}
-          priority
-        />
-        <div className="flex flex-col items-center gap-6 text-center sm:items-start sm:text-left">
-          <h1 className="max-w-xs text-3xl font-semibold leading-10 tracking-tight text-black dark:text-zinc-50">
-            To get started, edit the page.tsx file.
-          </h1>
-          <p className="max-w-md text-lg leading-8 text-zinc-600 dark:text-zinc-400">
-            Looking for a starting point or more instructions? Head over to{" "}
-            <a
-              href="https://vercel.com/templates?framework=next.js&utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-              className="font-medium text-zinc-950 dark:text-zinc-50"
-            >
-              Templates
-            </a>{" "}
-            or the{" "}
-            <a
-              href="https://nextjs.org/learn?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-              className="font-medium text-zinc-950 dark:text-zinc-50"
-            >
-              Learning
-            </a>{" "}
-            center.
-          </p>
+    <>
+      <Spotlight />
+      <div className="mx-auto max-w-6xl px-6 sm:px-10">
+        <div className="lg:flex lg:justify-between lg:gap-12">
+          <HomeSidebar />
+
+          <main className="pb-24 lg:w-[52%] lg:py-24">
+            {/* About */}
+            <section id="about" className="scroll-mt-24">
+              <SectionLabel>About</SectionLabel>
+              <Reveal className="space-y-5 leading-relaxed text-muted">
+                {profile.about.map((paragraph) => (
+                  <p key={paragraph.slice(0, 32)}>{paragraph}</p>
+                ))}
+              </Reveal>
+              <Reveal delay={0.1}>
+                <dl className="mt-10 grid grid-cols-2 gap-x-6 gap-y-8 border-y border-line py-8 sm:grid-cols-4">
+                  {profile.proofPoints.map((point) => (
+                    <div key={point.label}>
+                      <dd className="font-display text-2xl font-bold text-text">
+                        {point.value}
+                      </dd>
+                      <dt className="mt-1 text-xs leading-snug text-muted">
+                        {point.label}
+                      </dt>
+                    </div>
+                  ))}
+                </dl>
+              </Reveal>
+            </section>
+
+            <div className="my-16">
+              <Marquee />
+            </div>
+
+            {/* Experience */}
+            <section id="experience" className="scroll-mt-24">
+              <SectionLabel>Experience</SectionLabel>
+              <Reveal>
+                <ol className="group/list">
+                  {experience.map((job) => (
+                    <li key={job.role} className="mb-4">
+                      <div className="relative grid rounded-xl border border-transparent p-5 transition-all duration-300 sm:grid-cols-[150px_1fr] sm:gap-6 lg:group-hover/list:opacity-40 lg:hover:border-line lg:hover:bg-surface/60 lg:hover:opacity-100!">
+                        <div className="mb-1 mt-0.5 font-mono text-xs uppercase tracking-wide text-muted sm:mb-0">
+                          {job.period}
+                        </div>
+                        <div>
+                          <h3 className="font-medium text-text">
+                            {job.role} ·{" "}
+                            <span className="text-muted">{job.org}</span>
+                          </h3>
+                          <ul className="mt-2.5 space-y-1.5 text-sm leading-relaxed text-muted">
+                            {job.points.map((point) => (
+                              <li key={point}>{point}</li>
+                            ))}
+                          </ul>
+                        </div>
+                      </div>
+                    </li>
+                  ))}
+                </ol>
+              </Reveal>
+              <Reveal>
+                <a
+                  href={profile.cvPath}
+                  download
+                  className="group ml-5 mt-2 inline-flex items-center gap-2 font-medium text-text transition-colors hover:text-amber"
+                >
+                  Download full CV
+                  <span className="transition-transform group-hover:translate-x-1" aria-hidden="true">
+                    →
+                  </span>
+                </a>
+              </Reveal>
+            </section>
+
+            {/* Projects — premium showcase */}
+            <section id="projects" className="mt-24 scroll-mt-24">
+              <SectionLabel>Projects</SectionLabel>
+              <div className="space-y-20">
+                {featuredProjects.map((project, i) => (
+                  <Reveal key={project.slug}>
+                    <ShowcaseProject project={project} index={i} />
+                  </Reveal>
+                ))}
+              </div>
+              <Reveal>
+                <Link
+                  href="/projects"
+                  className="group mt-14 inline-flex items-center gap-2 font-medium text-text transition-colors hover:text-amber"
+                >
+                  View full project archive
+                  <span className="transition-transform group-hover:translate-x-1" aria-hidden="true">
+                    →
+                  </span>
+                </Link>
+              </Reveal>
+            </section>
+
+            {/* Research */}
+            <section id="research" className="mt-24 scroll-mt-24">
+              <SectionLabel>Research</SectionLabel>
+              <Reveal>
+                <p className="mb-8 max-w-lg text-sm leading-relaxed text-muted">
+                  Engineering answers &ldquo;how&rdquo;; research asks
+                  &ldquo;what actually works?&rdquo; These are the questions I
+                  study — several with live products as the testbed.
+                </p>
+              </Reveal>
+              <div className="grid gap-5 sm:grid-cols-2">
+                {research.map((item, i) => (
+                  <Reveal key={item.code} delay={(i % 2) * 0.07}>
+                    <a
+                      href={item.href}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="group flex h-full flex-col rounded-xl border border-line bg-surface/70 p-6 transition-all duration-300 hover:-translate-y-1 hover:border-amber/40"
+                    >
+                      <div className="flex items-center justify-between">
+                        <span className="font-mono text-xs text-amber">
+                          {item.code} · {item.area}
+                        </span>
+                        <span
+                          className="text-muted transition-colors group-hover:text-amber"
+                          aria-hidden="true"
+                        >
+                          ↗
+                        </span>
+                      </div>
+                      <h3 className="mt-3 font-display text-lg font-bold text-text">
+                        {item.title}
+                      </h3>
+                      <p className="mt-2 flex-1 text-sm leading-relaxed text-muted">
+                        {item.description}
+                      </p>
+                      <p className="mt-4 flex items-center gap-2 font-mono text-[11px] uppercase tracking-widest text-muted">
+                        <span
+                          className={`status-dot inline-block h-1.5 w-1.5 rounded-full ${
+                            item.status === "ongoing"
+                              ? "status-dot--pulse bg-amber text-amber"
+                              : item.status === "in-production"
+                                ? "bg-live text-live"
+                                : "bg-muted text-muted"
+                          }`}
+                          aria-hidden="true"
+                        />
+                        {item.statusLabel}
+                      </p>
+                    </a>
+                  </Reveal>
+                ))}
+              </div>
+            </section>
+
+            {/* Education */}
+            <section id="education" className="mt-24 scroll-mt-24">
+              <SectionLabel>Education</SectionLabel>
+              <Reveal>
+                <ol className="group/list">
+                  {education.map((entry) => (
+                    <li key={entry.degree} className="mb-4">
+                      <div className="relative grid rounded-xl border border-transparent p-5 transition-all duration-300 sm:grid-cols-[150px_1fr] sm:gap-6 lg:group-hover/list:opacity-40 lg:hover:border-line lg:hover:bg-surface/60 lg:hover:opacity-100!">
+                        <div className="mb-1 mt-0.5 font-mono text-xs uppercase tracking-wide text-muted sm:mb-0">
+                          {entry.period}
+                        </div>
+                        <div>
+                          <h3 className="font-medium text-text">{entry.degree}</h3>
+                          <p className="mt-0.5 text-sm text-muted">
+                            {entry.institution}
+                          </p>
+                          <p className="mt-2 font-mono text-sm text-amber">
+                            {entry.result}
+                          </p>
+                        </div>
+                      </div>
+                    </li>
+                  ))}
+                </ol>
+              </Reveal>
+              <Reveal>
+                <Link
+                  href="/education"
+                  className="group ml-5 mt-2 inline-flex items-center gap-2 font-medium text-text transition-colors hover:text-amber"
+                >
+                  Certifications & full record
+                  <span className="transition-transform group-hover:translate-x-1" aria-hidden="true">
+                    →
+                  </span>
+                </Link>
+              </Reveal>
+            </section>
+
+            {/* Outro */}
+            <Reveal>
+              <div className="mt-28 border-t border-line pt-10">
+                <h2 className="font-display text-2xl font-bold text-text">
+                  Need an engineer who ships?
+                </h2>
+                <p className="mt-3 max-w-md text-muted">
+                  I work remote-first from {profile.location} ({profile.timezone})
+                  and overlap comfortably with US and European hours.
+                </p>
+                <Link
+                  href="/contact"
+                  className="mt-6 inline-block rounded-lg bg-amber px-6 py-3 text-[15px] font-semibold text-bg transition-opacity hover:opacity-90"
+                >
+                  Start a conversation
+                </Link>
+                <p className="mt-14 font-mono text-xs text-muted/60">
+                  Designed & built by me — Next.js, Tailwind CSS, Framer Motion.
+                </p>
+              </div>
+            </Reveal>
+          </main>
         </div>
-        <div className="flex flex-col gap-4 text-base font-medium sm:flex-row">
-          <a
-            className="flex h-12 w-full items-center justify-center gap-2 rounded-full bg-foreground px-5 text-background transition-colors hover:bg-[#383838] dark:hover:bg-[#ccc] md:w-[158px]"
-            href="https://vercel.com/new?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            <Image
-              className="dark:invert"
-              src="/vercel.svg"
-              alt="Vercel logomark"
-              width={16}
-              height={16}
-            />
-            Deploy Now
-          </a>
-          <a
-            className="flex h-12 w-full items-center justify-center rounded-full border border-solid border-black/[.08] px-5 transition-colors hover:border-transparent hover:bg-black/[.04] dark:border-white/[.145] dark:hover:bg-[#1a1a1a] md:w-[158px]"
-            href="https://nextjs.org/docs?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Documentation
-          </a>
-        </div>
-      </main>
-    </div>
+      </div>
+    </>
   );
 }

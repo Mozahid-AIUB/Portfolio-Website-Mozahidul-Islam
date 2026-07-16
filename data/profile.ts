@@ -1,0 +1,30 @@
+export const profile = {
+  name: "Mozahidul Islam",
+  firstName: "Mozahid",
+  title: "Full-Stack & Mobile Developer",
+  role: "Software Engineer",
+  identity: "Software Engineer · Developer · Researcher",
+  headline: "I design, build, and ship production software.",
+  subhead:
+    "From a study planner live on the Play Store to a multi-tenant SaaS platform — I own products end to end: architecture, build, security, deployment, and everything in between.",
+  location: "Dhaka, Bangladesh",
+  timezone: "GMT+6",
+  openTo: "Open to remote software engineering roles",
+  email: "mozahidul.islam.ai@gmail.com",
+  phone: "+880 1707 591 255",
+  github: "https://github.com/Mozahid-AIUB",
+  linkedin: "https://www.linkedin.com/in/md-mozahidul-islam-831276396/",
+  codeforces: "https://codeforces.com/profile/mozahid1212121",
+  cvPath: "/CV_Mozahidul_Islam.pdf",
+  about: [
+    "I'm a Computer Science & Engineering graduate from AIUB who learns by shipping. My apps are not classroom demos — they run in production with real users: StudyForce lives on the Google Play Store, FBReach automates Facebook marketing for real businesses, and Practical Khata BD delivers physical products ordered through a site I built.",
+    "I work across the stack and across platforms — React Native and Expo on mobile, Node.js, Django and Laravel on the server, PostgreSQL, Oracle and Firebase underneath. I care about the unglamorous parts that make software trustworthy: authentication, encrypted storage, multi-tenant isolation, and store review processes. My R&D time goes into retrieval-augmented generation and LLM tool protocols like MCP — which I've already shipped in production.",
+    "Before any of that, I built my fundamentals the hard way — competitive programming on Codeforces, data structures in C++, database normalization on Oracle, and an obstacle-avoiding robot programmed in embedded C. I also teach: mathematics and ICT to school students, and programming to beginners on YouTube. Explaining things clearly is an engineering skill too.",
+  ],
+  proofPoints: [
+    { value: "4", label: "products live in production" },
+    { value: "50+", label: "Play Store installs & growing" },
+    { value: "35", label: "public GitHub repositories" },
+    { value: "5", label: "platforms shipped — mobile, web, SaaS, desktop, embedded" },
+  ],
+};

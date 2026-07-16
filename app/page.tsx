@@ -27,7 +27,7 @@ export default function Home() {
         <div className="lg:flex lg:justify-between lg:gap-12">
           <HomeSidebar />
 
-          <main className="pb-24 lg:w-[52%] lg:py-24">
+          <main className="pb-32 lg:w-[52%] lg:pb-40 lg:pt-24">
             {/* About */}
             <section id="about" className="scroll-mt-24">
               <SectionLabel>About</SectionLabel>

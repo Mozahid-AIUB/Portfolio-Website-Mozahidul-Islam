@@ -21,18 +21,11 @@ export const experiments: Experiment[] = [
     href: "https://github.com/Mozahid-AIUB/Exploring-nest.js",
   },
   {
-    name: "Live Translator App",
+    name: "Library Management System",
     description:
-      "Real-time translation experiment — speech in, translated text out.",
-    tech: ["JavaScript"],
-    href: "https://github.com/Mozahid-AIUB/Live-Translator-App",
-  },
-  {
-    name: "The Village Scenario",
-    description:
-      "2D animated village scene rendered with OpenGL/GLUT in C++ — computer graphics from primitives up.",
-    tech: ["C++", "OpenGL"],
-    href: "https://github.com/Mozahid-AIUB/Computer_Grapics_Projects_-The-Village-Scenario",
+      "Client project: a C# library management system delivered to spec.",
+    tech: ["C#", ".NET"],
+    href: "https://github.com/Mozahid-AIUB/C-Client-project-Library_Management_System",
   },
   {
     name: "Manim Cinematic Showcase",
@@ -49,11 +42,18 @@ export const experiments: Experiment[] = [
     href: "https://github.com/Mozahid-AIUB/automated-job-outreach",
   },
   {
-    name: "Library Management System",
+    name: "Live Translator App",
     description:
-      "Client project: a C# library management system delivered to spec.",
-    tech: ["C#", ".NET"],
-    href: "https://github.com/Mozahid-AIUB/C-Client-project-Library_Management_System",
+      "Real-time translation experiment — speech in, translated text out.",
+    tech: ["JavaScript"],
+    href: "https://github.com/Mozahid-AIUB/Live-Translator-App",
+  },
+  {
+    name: "The Village Scenario",
+    description:
+      "2D animated village scene rendered with OpenGL/GLUT in C++ — computer graphics from primitives up.",
+    tech: ["C++", "OpenGL"],
+    href: "https://github.com/Mozahid-AIUB/Computer_Grapics_Projects_-The-Village-Scenario",
   },
   {
     name: "Nixus UI Design",

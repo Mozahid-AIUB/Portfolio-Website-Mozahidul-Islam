@@ -1,69 +1,83 @@
 import type { Metadata } from "next";
+import Link from "next/link";
 import { SectionHeading } from "@/components/SectionHeading";
 import { Reveal } from "@/components/Reveal";
-import { experiments } from "@/data/experiments";
-import { profile } from "@/data/profile";
+import { research } from "@/data/research";
 
 export const metadata: Metadata = {
-  title: "Research & Experiments",
+  title: "Research",
   description:
-    "Research explorations and side builds — RAG systems, MCP protocols, NestJS, OpenGL graphics, Manim animations, and workflow automation.",
+    "Research directions and upcoming publications — RAG systems, LLM tool protocols, EdTech engagement mechanics.",
 };
 
-export default function ExperimentsPage() {
+export default function ResearchPage() {
   return (
     <div className="mx-auto max-w-6xl px-5 py-20 sm:px-8">
       <SectionHeading
-        eyebrow="research & experiments"
-        title="The laboratory"
-        lede="Research needs a lab. This is mine — RAG pipelines, LLM tool protocols, graphics programming, and builds where I test ideas before they reach production. 35 public repos and counting."
+        eyebrow="research"
+        title="Formal research & publications"
+        lede="This page is reserved for published work. Papers and formal write-ups are in progress — the directions below are where they'll come from."
       />
 
-      <div className="grid gap-5 sm:grid-cols-2 lg:grid-cols-3">
-        {experiments.map((exp, i) => (
-          <Reveal key={exp.name} delay={(i % 3) * 0.05}>
-            <a
-              href={exp.href}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="group flex h-full flex-col rounded-xl border border-line bg-surface p-6 transition-colors hover:border-amber/40"
-            >
-              <div className="mb-3 flex items-center justify-between">
-                <span className="font-mono text-xs text-muted">
-                  {exp.tech.join(" · ")}
+      <Reveal>
+        <div className="rounded-2xl border border-dashed border-amber/40 bg-surface/60 p-10 text-center sm:p-14">
+          <p className="inline-flex items-center gap-2.5 rounded-full border border-line bg-bg px-4 py-1.5 font-mono text-xs uppercase tracking-[0.2em] text-amber">
+            <span
+              className="status-dot status-dot--pulse inline-block h-1.5 w-1.5 rounded-full bg-amber text-amber"
+              aria-hidden="true"
+            />
+            Upcoming
+          </p>
+          <h2 className="mx-auto mt-5 max-w-lg font-display text-2xl font-bold tracking-tight text-text sm:text-3xl">
+            Publications are on the way.
+          </h2>
+          <p className="mx-auto mt-4 max-w-md text-sm leading-relaxed text-muted">
+            I research the way I engineer — with live products as testbeds.
+            Formal write-ups of that work will land here.
+          </p>
+        </div>
+      </Reveal>
+
+      <div className="mt-16">
+        <p className="mb-6 font-mono text-xs uppercase tracking-[0.25em] text-amber">
+          Active research directions
+        </p>
+        <ol className="divide-y divide-line border-y border-line">
+          {research.map((item) => (
+            <li key={item.code}>
+              <a
+                href={item.href}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="group grid gap-2 py-6 transition-colors sm:grid-cols-[110px_1fr_auto] sm:items-baseline sm:gap-6"
+              >
+                <span className="font-mono text-xs text-amber">
+                  {item.code} · {item.area}
                 </span>
-                <span className="text-muted transition-colors group-hover:text-amber" aria-hidden="true">
-                  ↗
+                <span>
+                  <span className="font-display text-base font-bold text-text transition-colors group-hover:text-amber">
+                    {item.title}
+                  </span>
+                  <span className="mt-1 block text-sm leading-relaxed text-muted">
+                    {item.description}
+                  </span>
                 </span>
-              </div>
-              <h2 className="font-display text-lg font-bold text-text">
-                {exp.name}
-              </h2>
-              <p className="mt-2 flex-1 text-sm text-muted">{exp.description}</p>
-            </a>
-          </Reveal>
-        ))}
+                <span className="font-mono text-[11px] uppercase tracking-widest text-muted">
+                  {item.statusLabel} ↗
+                </span>
+              </a>
+            </li>
+          ))}
+        </ol>
       </div>
 
       <Reveal>
-        <div className="mt-16 rounded-xl border border-line bg-surface p-8 text-center">
-          <p className="font-mono text-xs uppercase tracking-[0.2em] text-amber">
-            Also on YouTube
-          </p>
-          <p className="mx-auto mt-3 max-w-xl text-muted">
-            I make programming and ICT tutorials for beginners — Python, Java
-            and web technologies. Teaching in public keeps my fundamentals
-            honest.
-          </p>
-          <a
-            href={profile.github}
-            target="_blank"
-            rel="noopener noreferrer"
-            className="mt-5 inline-block font-mono text-sm text-amber hover:opacity-80"
-          >
-            Browse all 35 repos on GitHub ↗
-          </a>
-        </div>
+        <p className="mt-14 text-center text-sm text-muted">
+          Looking for the smaller builds that used to live here?{" "}
+          <Link href="/projects" className="text-amber hover:opacity-80">
+            They&apos;re on the projects page now →
+          </Link>
+        </p>
       </Reveal>
     </div>
   );

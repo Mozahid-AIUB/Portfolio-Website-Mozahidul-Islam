@@ -1,3 +1,4 @@
+import Image from "next/image";
 import type { Project } from "@/data/projects";
 
 function SkeletonLines() {
@@ -15,30 +16,42 @@ export function DeviceMockup({ project }: { project: Project }) {
     return (
       <div className="relative mx-auto w-48 sm:w-52">
         <div className="rounded-[2.4rem] border border-line bg-surface p-2 shadow-2xl shadow-black/40">
-          <div
-            className="relative flex h-[380px] flex-col overflow-hidden rounded-[1.9rem] p-5"
-            style={{ background: project.cover }}
-          >
-            <div className="mx-auto mb-6 h-5 w-20 rounded-full bg-black/30" />
-            <p className="font-mono text-[10px] uppercase tracking-[0.2em] text-white/70">
-              {project.displayUrl ?? project.name}
-            </p>
-            <div className="mt-4">
-              <SkeletonLines />
+          {project.screenshot ? (
+            <div className="relative h-[380px] overflow-hidden rounded-[1.9rem]">
+              <Image
+                src={project.screenshot}
+                alt={`${project.name} app screenshot`}
+                fill
+                sizes="208px"
+                className="object-cover object-top"
+              />
             </div>
-            <div className="mt-6 grid grid-cols-2 gap-2.5">
-              <div className="h-14 rounded-xl bg-white/15" />
-              <div className="h-14 rounded-xl bg-white/10" />
-              <div className="h-14 rounded-xl bg-white/10" />
-              <div className="h-14 rounded-xl bg-white/15" />
-            </div>
-            <span
-              className="pointer-events-none absolute -bottom-4 -right-2 select-none font-display text-8xl font-extrabold text-white/15"
-              aria-hidden="true"
+          ) : (
+            <div
+              className="relative flex h-[380px] flex-col overflow-hidden rounded-[1.9rem] p-5"
+              style={{ background: project.cover }}
             >
-              {project.monogram}
-            </span>
-          </div>
+              <div className="mx-auto mb-6 h-5 w-20 rounded-full bg-black/30" />
+              <p className="font-mono text-[10px] uppercase tracking-[0.2em] text-white/70">
+                {project.displayUrl ?? project.name}
+              </p>
+              <div className="mt-4">
+                <SkeletonLines />
+              </div>
+              <div className="mt-6 grid grid-cols-2 gap-2.5">
+                <div className="h-14 rounded-xl bg-white/15" />
+                <div className="h-14 rounded-xl bg-white/10" />
+                <div className="h-14 rounded-xl bg-white/10" />
+                <div className="h-14 rounded-xl bg-white/15" />
+              </div>
+              <span
+                className="pointer-events-none absolute -bottom-4 -right-2 select-none font-display text-8xl font-extrabold text-white/15"
+                aria-hidden="true"
+              >
+                {project.monogram}
+              </span>
+            </div>
+          )}
         </div>
       </div>
     );
@@ -56,25 +69,37 @@ export function DeviceMockup({ project }: { project: Project }) {
           {project.displayUrl ?? project.name}
         </span>
       </div>
-      <div
-        className="relative h-60 overflow-hidden p-6 sm:h-64"
-        style={{ background: project.cover }}
-      >
-        <div className="max-w-[55%]">
-          <div className="mb-4 h-3 w-24 rounded-full bg-white/30" />
-          <SkeletonLines />
-          <div className="mt-5 flex gap-2">
-            <div className="h-7 w-20 rounded-md bg-white/25" />
-            <div className="h-7 w-14 rounded-md bg-white/10" />
-          </div>
+      {project.screenshot ? (
+        <div className="relative h-60 sm:h-64">
+          <Image
+            src={project.screenshot}
+            alt={`${project.name} screenshot`}
+            fill
+            sizes="(min-width: 1024px) 480px, 100vw"
+            className="object-cover object-top"
+          />
         </div>
-        <span
-          className="pointer-events-none absolute -bottom-8 -right-3 select-none font-display text-[10rem] font-extrabold leading-none text-white/15"
-          aria-hidden="true"
+      ) : (
+        <div
+          className="relative h-60 overflow-hidden p-6 sm:h-64"
+          style={{ background: project.cover }}
         >
-          {project.monogram}
-        </span>
-      </div>
+          <div className="max-w-[55%]">
+            <div className="mb-4 h-3 w-24 rounded-full bg-white/30" />
+            <SkeletonLines />
+            <div className="mt-5 flex gap-2">
+              <div className="h-7 w-20 rounded-md bg-white/25" />
+              <div className="h-7 w-14 rounded-md bg-white/10" />
+            </div>
+          </div>
+          <span
+            className="pointer-events-none absolute -bottom-8 -right-3 select-none font-display text-[10rem] font-extrabold leading-none text-white/15"
+            aria-hidden="true"
+          >
+            {project.monogram}
+          </span>
+        </div>
+      )}
     </div>
   );
 }

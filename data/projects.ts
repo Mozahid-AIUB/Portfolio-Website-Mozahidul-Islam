@@ -33,6 +33,8 @@ export interface Project {
   kind: "web" | "mobile";
   /** short URL shown in the mockup chrome */
   displayUrl?: string;
+  /** real screenshot path under /public — replaces the skeleton art when set */
+  screenshot?: string;
 }
 
 export const projects: Project[] = [
@@ -66,6 +68,7 @@ export const projects: Project[] = [
     monogram: "SF",
     kind: "mobile",
     displayUrl: "play.google.com/studyforce",
+    screenshot: "/projects/studyforce.png",
   },
   {
     slug: "fbreach",
@@ -92,6 +95,7 @@ export const projects: Project[] = [
     monogram: "FB",
     kind: "web",
     displayUrl: "fbreach.onrender.com",
+    screenshot: "/projects/fbreach.png",
   },
   {
     slug: "gosharex",
@@ -122,6 +126,7 @@ export const projects: Project[] = [
     monogram: "GX",
     kind: "mobile",
     displayUrl: "GoShareX — ride sharing",
+    screenshot: "/projects/gosharex.png",
   },
   {
     slug: "practical-khata-bd",
@@ -147,6 +152,7 @@ export const projects: Project[] = [
     monogram: "PK",
     kind: "web",
     displayUrl: "practicalkhata.pro.bd",
+    screenshot: "/projects/practicalkhata.png",
   },
   {
     slug: "mehendihub",
@@ -169,6 +175,31 @@ export const projects: Project[] = [
     monogram: "MH",
     kind: "web",
     displayUrl: "mehendihub.netlify.app",
+  },
+  {
+    slug: "charulata-green-bd",
+    name: "Charulata Green BD",
+    tagline: "Bilingual plant-nursery e-commerce platform",
+    period: "2026",
+    status: "source",
+    statusLabel: "Demo build",
+    category: "Web",
+    built: [
+      "Full e-commerce experience for a plant nursery: categorized catalog (fruit trees, flower plants, gardening tools), cart, wishlist and top-sellers carousel.",
+      "Bilingual UI — Bangla and English — with appointment booking for garden consultations.",
+    ],
+    tech: ["TypeScript", "React", "Tailwind CSS"],
+    links: [
+      {
+        label: "GitHub",
+        href: "https://github.com/Mozahid-AIUB/charulata-green-bd",
+      },
+    ],
+    cover: "linear-gradient(135deg, #14532d 0%, #4ade80 100%)",
+    monogram: "CH",
+    kind: "web",
+    displayUrl: "Charulata — plant e-commerce",
+    screenshot: "/projects/charulata.png",
   },
   {
     slug: "day-care-management",

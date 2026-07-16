@@ -1,3 +1,4 @@
+import Image from "next/image";
 import type { Project } from "@/data/projects";
 import { StatusBadge } from "./StatusBadge";
 import { TechChips } from "./TechChips";
@@ -5,15 +6,27 @@ import { TechChips } from "./TechChips";
 export function ProjectCard({ project }: { project: Project }) {
   return (
     <article className="group flex h-full flex-col overflow-hidden rounded-xl border border-line bg-surface transition-all duration-300 hover:-translate-y-1 hover:border-amber/40">
-      <div
-        className="relative h-20 overflow-hidden"
-        style={{ background: project.cover }}
-        aria-hidden="true"
-      >
-        <span className="absolute -bottom-5 right-3 select-none font-display text-6xl font-extrabold leading-none text-white/20 transition-transform duration-300 group-hover:scale-110">
-          {project.monogram}
-        </span>
-      </div>
+      {project.screenshot ? (
+        <div className="relative h-36 overflow-hidden" aria-hidden="true">
+          <Image
+            src={project.screenshot}
+            alt=""
+            fill
+            sizes="(min-width: 640px) 50vw, 100vw"
+            className="object-cover object-top transition-transform duration-500 group-hover:scale-105"
+          />
+        </div>
+      ) : (
+        <div
+          className="relative h-20 overflow-hidden"
+          style={{ background: project.cover }}
+          aria-hidden="true"
+        >
+          <span className="absolute -bottom-5 right-3 select-none font-display text-6xl font-extrabold leading-none text-white/20 transition-transform duration-300 group-hover:scale-110">
+            {project.monogram}
+          </span>
+        </div>
+      )}
       <div className="flex flex-1 flex-col p-6">
       <div className="mb-4 flex items-center justify-between gap-3">
         <StatusBadge status={project.status} />

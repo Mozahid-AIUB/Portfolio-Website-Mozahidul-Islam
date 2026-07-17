@@ -18,7 +18,7 @@ export const skillGroups: SkillGroup[] = [
   {
     title: "Backend & Web",
     note: "Production APIs with auth, encryption and multi-tenancy",
-    items: ["Node.js", "NestJS", "ASP.NET", "Django", "Laravel", "Multi-tenant SaaS", "REST APIs", "OAuth 2.0", "Tailwind CSS"],
+    items: ["Node.js", "NestJS", "ASP.NET", "Django", "Multi-tenant SaaS", "REST APIs", "OAuth 2.0", "Tailwind CSS"],
   },
   {
     title: "Data & Infrastructure",

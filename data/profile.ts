@@ -18,7 +18,7 @@ export const profile = {
   cvPath: "/CV_Mozahidul_Islam.pdf",
   about: [
     "I'm a software engineer who ships. My products run in production with real users: StudyForce lives on the Google Play Store, FBReach automates Facebook marketing for real businesses, and Practical Khata BD takes orders and delivers physical products across Bangladesh through a platform I built end to end.",
-    "I work across the stack and across platforms — React Native and Expo on mobile, Node.js, Django and Laravel on the server, PostgreSQL, Oracle and Firebase underneath. I care about the unglamorous parts that make software trustworthy: authentication, encrypted storage, multi-tenant isolation, and store review processes. My R&D time goes into retrieval-augmented generation and LLM tool protocols like MCP — which I've already shipped in production.",
+    "I work across the stack and across platforms — React Native and Expo on mobile, Node.js, NestJS and Django on the server, PostgreSQL, Oracle and Firebase underneath. I care about the unglamorous parts that make software trustworthy: authentication, encrypted storage, multi-tenant isolation, and store review processes. My R&D time goes into retrieval-augmented generation and LLM tool protocols like MCP — which I've already shipped in production.",
     "Before any of that, I built my fundamentals the hard way — competitive programming on Codeforces, data structures in C++, database normalization on Oracle, and an obstacle-avoiding robot programmed in embedded C. I also teach: mathematics and ICT to school students, and programming to beginners on YouTube. Explaining things clearly is an engineering skill too.",
   ],
   proofPoints: [

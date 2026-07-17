@@ -6,9 +6,11 @@ import { useEffect, useState } from "react";
 import { motion, useReducedMotion } from "framer-motion";
 import { profile } from "@/data/profile";
 import { Typewriter } from "./Typewriter";
+import { LocalTime } from "./LocalTime";
 
 const sections = [
   { id: "about", label: "About" },
+  { id: "skills", label: "Skills" },
   { id: "experience", label: "Experience" },
   { id: "projects", label: "Projects" },
   { id: "research", label: "Research" },
@@ -51,10 +53,9 @@ export function HomeSidebar() {
 
   return (
     <header className="scrollbar-none relative py-16 lg:sticky lg:top-16 lg:flex lg:h-[calc(100vh-4rem)] lg:w-[44%] lg:flex-col lg:justify-between lg:overflow-y-auto lg:py-14">
-      <div
-        className="glow-blob absolute -left-20 top-4 -z-10 h-72 w-72 rounded-full"
-        aria-hidden="true"
-      />
+      <div className="absolute inset-0 -z-10 overflow-hidden" aria-hidden="true">
+        <div className="aurora" />
+      </div>
       <motion.div
         initial={reduce ? false : "hidden"}
         animate="show"
@@ -85,15 +86,24 @@ export function HomeSidebar() {
           ~/mozahid · {profile.location.toUpperCase()}
         </motion.p>
 
-        <motion.h1
-          variants={entrance}
-          transition={{ duration: 0.55 }}
-          className="shimmer-text mt-4 font-display text-4xl font-extrabold leading-[1.02] tracking-tight sm:text-5xl"
-        >
-          Mozahidul
-          <br />
-          Islam
-        </motion.h1>
+        <h1 className="mt-4 font-display text-4xl font-extrabold leading-[1.02] tracking-tight sm:text-5xl">
+          {["Mozahidul", "Islam"].map((word, i) => (
+            <span key={word} className="block overflow-hidden pb-0.5">
+              <motion.span
+                className="shimmer-text block"
+                initial={reduce ? false : { y: "110%" }}
+                animate={{ y: 0 }}
+                transition={{
+                  duration: 0.7,
+                  delay: 0.2 + i * 0.12,
+                  ease: [0.21, 0.65, 0.36, 1],
+                }}
+              >
+                {word}
+              </motion.span>
+            </span>
+          ))}
+        </h1>
 
         <motion.h2
           variants={entrance}
@@ -185,6 +195,9 @@ export function HomeSidebar() {
         transition={{ delay: 0.6, duration: 0.5 }}
         className="mt-10 flex items-center gap-5 lg:mt-0"
       >
+        <span className="mr-1 font-mono text-[11px] text-muted">
+          DHK <LocalTime />
+        </span>
         <a
           href={profile.github}
           target="_blank"

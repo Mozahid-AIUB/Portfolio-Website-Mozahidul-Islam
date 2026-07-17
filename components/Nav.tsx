@@ -51,6 +51,15 @@ export function Nav() {
             );
           })}
           <div className="ml-3 flex items-center gap-3">
+            <button
+              type="button"
+              onClick={() => window.dispatchEvent(new Event("open-cmdk"))}
+              aria-label="Open command menu"
+              className="hidden items-center gap-1.5 rounded-md border border-line px-2.5 py-1.5 font-mono text-[11px] text-muted transition-colors hover:border-amber/50 hover:text-text lg:flex"
+            >
+              <kbd>Ctrl</kbd>
+              <kbd>K</kbd>
+            </button>
             <ThemeToggle />
             <Magnetic>
               <Link

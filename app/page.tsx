@@ -12,6 +12,16 @@ import { featuredProjects } from "@/data/projects";
 import { research } from "@/data/research";
 import { experience } from "@/data/experience";
 import { education } from "@/data/education";
+import { skillGroups } from "@/data/skills";
+
+const bentoSpans = [
+  "sm:col-span-2",
+  "",
+  "sm:col-span-2",
+  "",
+  "",
+  "sm:col-span-2",
+];
 
 function SectionLabel({ children }: { children: React.ReactNode }) {
   return (
@@ -58,8 +68,41 @@ export default function Home() {
               <Marquee />
             </div>
 
+            {/* Skills — bento grid */}
+            <section id="skills" className="scroll-mt-24">
+              <SectionLabel>Skills</SectionLabel>
+              <div className="grid gap-4 sm:grid-cols-3">
+                {skillGroups.map((group, i) => (
+                  <Reveal
+                    key={group.title}
+                    delay={(i % 3) * 0.06}
+                    className={bentoSpans[i] ?? ""}
+                  >
+                    <div className="group h-full rounded-2xl border border-line bg-surface/70 p-6 transition-colors duration-300 hover:border-amber/40">
+                      <h3 className="font-display text-base font-bold text-text">
+                        {group.title}
+                      </h3>
+                      <p className="mt-1 text-xs leading-relaxed text-muted">
+                        {group.note}
+                      </p>
+                      <ul className="mt-4 flex flex-wrap gap-1.5">
+                        {group.items.map((item) => (
+                          <li
+                            key={item}
+                            className="rounded-md border border-line px-2 py-0.5 font-mono text-[11px] text-muted transition-colors group-hover:border-line group-hover:text-text"
+                          >
+                            {item}
+                          </li>
+                        ))}
+                      </ul>
+                    </div>
+                  </Reveal>
+                ))}
+              </div>
+            </section>
+
             {/* Experience */}
-            <section id="experience" className="scroll-mt-24">
+            <section id="experience" className="mt-24 scroll-mt-24">
               <SectionLabel>Experience</SectionLabel>
               <Reveal>
                 <ol className="group/list">

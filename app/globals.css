@@ -100,6 +100,52 @@ body {
   opacity: 0.35;
 }
 
+/* ── Film grain overlay ────────────────────────────────────────── */
+.grain {
+  position: fixed;
+  inset: 0;
+  z-index: 80;
+  pointer-events: none;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='180' height='180'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2' stitchTiles='stitch'/%3E%3CfeColorMatrix type='saturate' values='0'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+  background-size: 180px 180px;
+  mix-blend-mode: overlay;
+  opacity: 0.05;
+}
+
+.light .grain {
+  opacity: 0.03;
+}
+
+/* ── Aurora — living gradient behind the hero ──────────────────── */
+@keyframes aurora-shift {
+  0%,
+  100% {
+    transform: translate(0, 0) rotate(0deg) scale(1);
+  }
+  33% {
+    transform: translate(30px, -24px) rotate(8deg) scale(1.1);
+  }
+  66% {
+    transform: translate(-24px, 18px) rotate(-6deg) scale(0.95);
+  }
+}
+
+.aurora {
+  position: absolute;
+  inset: -20%;
+  pointer-events: none;
+  background:
+    radial-gradient(38% 42% at 28% 32%, rgba(245, 184, 65, 0.16), transparent 70%),
+    radial-gradient(30% 34% at 68% 22%, rgba(56, 132, 255, 0.1), transparent 70%),
+    radial-gradient(36% 40% at 45% 70%, rgba(245, 184, 65, 0.07), transparent 70%);
+  filter: blur(42px);
+  animation: aurora-shift 18s ease-in-out infinite;
+}
+
+.light .aurora {
+  opacity: 0.55;
+}
+
 /* ── Status lights ─────────────────────────────────────────────── */
 .status-dot {
   box-shadow: 0 0 8px 1px currentColor;
@@ -269,6 +315,7 @@ body {
   .status-dot--pulse,
   .marquee-track,
   .glow-blob,
+  .aurora,
   .beam-border::before,
   .type-caret {
     animation: none;

@@ -5,6 +5,8 @@ import { Nav } from "@/components/Nav";
 import { Footer } from "@/components/Footer";
 import { Particles } from "@/components/Particles";
 import { CursorGlow } from "@/components/CursorGlow";
+import { SmoothScroll } from "@/components/SmoothScroll";
+import { Preloader } from "@/components/Preloader";
 import { profile } from "@/data/profile";
 
 const bricolage = Bricolage_Grotesque({
@@ -127,6 +129,8 @@ export default function RootLayout({
         />
       </head>
       <body className="min-h-full flex flex-col bg-bg text-text">
+        <Preloader />
+        <SmoothScroll />
         <Particles />
         <CursorGlow />
         <Nav />

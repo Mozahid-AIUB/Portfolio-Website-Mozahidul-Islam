@@ -45,6 +45,26 @@ html {
   scroll-behavior: smooth;
 }
 
+/* Lenis drives scrolling when active — hand it full control */
+html.lenis,
+html.lenis body {
+  height: auto;
+}
+
+.lenis.lenis-smooth {
+  scroll-behavior: auto !important;
+}
+
+/* Hide scrollbars where scrolling is a fallback, not a feature */
+.scrollbar-none {
+  scrollbar-width: none;
+  -ms-overflow-style: none;
+}
+
+.scrollbar-none::-webkit-scrollbar {
+  display: none;
+}
+
 @media (prefers-reduced-motion: reduce) {
   html {
     scroll-behavior: auto;

@@ -50,7 +50,7 @@ export function HomeSidebar() {
   }, []);
 
   return (
-    <header className="relative py-16 lg:sticky lg:top-16 lg:flex lg:h-[calc(100vh-4rem)] lg:w-[44%] lg:flex-col lg:justify-between lg:overflow-y-auto lg:py-14">
+    <header className="scrollbar-none relative py-16 lg:sticky lg:top-16 lg:flex lg:h-[calc(100vh-4rem)] lg:w-[44%] lg:flex-col lg:justify-between lg:overflow-y-auto lg:py-14">
       <div
         className="glow-blob absolute -left-20 top-4 -z-10 h-72 w-72 rounded-full"
         aria-hidden="true"
@@ -63,9 +63,9 @@ export function HomeSidebar() {
         <motion.div
           variants={entrance}
           transition={{ duration: 0.5 }}
-          className="mb-7"
+          className="mb-5"
         >
-          <div className="relative h-28 w-24 overflow-hidden rounded-2xl border border-line shadow-2xl shadow-black/40">
+          <div className="relative h-24 w-20 overflow-hidden rounded-2xl border border-line shadow-2xl shadow-black/40">
             <Image
               src="/mozahid.jpg"
               alt={`Portrait of ${profile.name}`}
@@ -88,7 +88,7 @@ export function HomeSidebar() {
         <motion.h1
           variants={entrance}
           transition={{ duration: 0.55 }}
-          className="shimmer-text mt-5 font-display text-5xl font-extrabold leading-[1.02] tracking-tight sm:text-6xl"
+          className="shimmer-text mt-4 font-display text-4xl font-extrabold leading-[1.02] tracking-tight sm:text-5xl"
         >
           Mozahidul
           <br />
@@ -126,10 +126,10 @@ export function HomeSidebar() {
         <motion.nav
           variants={entrance}
           transition={{ duration: 0.55 }}
-          className="mt-14 hidden lg:block"
+          className="mt-9 hidden lg:block"
           aria-label="Section navigation"
         >
-          <ul className="space-y-4">
+          <ul className="space-y-3">
             {sections.map((section) => {
               const isActive = active === section.id;
               return (
@@ -165,7 +165,7 @@ export function HomeSidebar() {
         <motion.div
           variants={entrance}
           transition={{ duration: 0.55 }}
-          className="mt-10 hidden flex-wrap gap-x-5 gap-y-2 lg:flex"
+          className="mt-8 hidden flex-wrap gap-x-5 gap-y-2 lg:flex"
         >
           {pageLinks.map((link) => (
             <Link

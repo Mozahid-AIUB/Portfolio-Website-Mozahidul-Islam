@@ -5,6 +5,7 @@ import { usePathname } from "next/navigation";
 import { useState } from "react";
 import { ThemeToggle } from "./ThemeToggle";
 import { ScrollProgress } from "./ScrollProgress";
+import { Magnetic } from "./Magnetic";
 
 const links = [
   { href: "/", label: "Home" },
@@ -51,12 +52,14 @@ export function Nav() {
           })}
           <div className="ml-3 flex items-center gap-3">
             <ThemeToggle />
-            <Link
-              href="/contact"
-              className="beam-border rounded-full border border-amber/30 bg-amber-dim px-4 py-1.5 text-sm font-semibold text-amber transition-colors hover:bg-amber hover:text-bg"
-            >
-              Hire me
-            </Link>
+            <Magnetic>
+              <Link
+                href="/contact"
+                className="beam-border block rounded-full border border-amber/30 bg-amber-dim px-4 py-1.5 text-sm font-semibold text-amber transition-colors hover:bg-amber hover:text-bg"
+              >
+                Hire me
+              </Link>
+            </Magnetic>
           </div>
         </div>
 

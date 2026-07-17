@@ -5,6 +5,8 @@ import { Marquee } from "@/components/Marquee";
 import { Reveal } from "@/components/Reveal";
 import { StatusBadge } from "@/components/StatusBadge";
 import { ShowcaseProject } from "@/components/ShowcaseProject";
+import { CountUp } from "@/components/CountUp";
+import { Magnetic } from "@/components/Magnetic";
 import { profile } from "@/data/profile";
 import { featuredProjects } from "@/data/projects";
 import { research } from "@/data/research";
@@ -41,7 +43,7 @@ export default function Home() {
                   {profile.proofPoints.map((point) => (
                     <div key={point.label}>
                       <dd className="font-display text-2xl font-bold text-text">
-                        {point.value}
+                        <CountUp value={point.value} />
                       </dd>
                       <dt className="mt-1 text-xs leading-snug text-muted">
                         {point.label}
@@ -223,12 +225,14 @@ export default function Home() {
                   I work remote-first from {profile.location} ({profile.timezone})
                   and overlap comfortably with US and European hours.
                 </p>
-                <Link
-                  href="/contact"
-                  className="mt-6 inline-block rounded-lg bg-amber px-6 py-3 text-[15px] font-semibold text-bg transition-opacity hover:opacity-90"
-                >
-                  Start a conversation
-                </Link>
+                <Magnetic className="mt-6">
+                  <Link
+                    href="/contact"
+                    className="block rounded-lg bg-amber px-6 py-3 text-[15px] font-semibold text-bg transition-opacity hover:opacity-90"
+                  >
+                    Start a conversation
+                  </Link>
+                </Magnetic>
                 <p className="mt-14 font-mono text-xs text-muted/60">
                   Designed & built by me — Next.js, Tailwind CSS, Framer Motion.
                 </p>

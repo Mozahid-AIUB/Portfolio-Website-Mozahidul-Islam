@@ -23,7 +23,7 @@ export const profile = {
   ],
   proofPoints: [
     { value: "10+", label: "products built & shipped — 4 live in production" },
-    { value: "14+", label: "features shipped in StudyForce alone" },
+    { value: "24/7", label: "SaaS in production, serving businesses round the clock" },
     { value: "35", label: "public GitHub repositories" },
     { value: "5", label: "platforms shipped — mobile, web, SaaS, desktop, embedded" },
   ],

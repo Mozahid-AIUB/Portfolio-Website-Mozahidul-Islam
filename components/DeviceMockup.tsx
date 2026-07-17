@@ -1,5 +1,5 @@
-import Image from "next/image";
 import type { Project } from "@/data/projects";
+import { ScreenshotRotator } from "./ScreenshotRotator";
 
 function SkeletonLines() {
   return (
@@ -16,14 +16,12 @@ export function DeviceMockup({ project }: { project: Project }) {
     return (
       <div className="relative mx-auto w-48 sm:w-52">
         <div className="rounded-[2.4rem] border border-line bg-surface p-2 shadow-2xl shadow-black/40">
-          {project.screenshot ? (
+          {project.screenshots?.length ? (
             <div className="relative h-[380px] overflow-hidden rounded-[1.9rem]">
-              <Image
-                src={project.screenshot}
+              <ScreenshotRotator
+                images={project.screenshots}
                 alt={`${project.name} app screenshot`}
-                fill
                 sizes="208px"
-                className="object-cover object-top"
               />
             </div>
           ) : (
@@ -69,14 +67,12 @@ export function DeviceMockup({ project }: { project: Project }) {
           {project.displayUrl ?? project.name}
         </span>
       </div>
-      {project.screenshot ? (
-        <div className="relative h-60 sm:h-64">
-          <Image
-            src={project.screenshot}
+      {project.screenshots?.length ? (
+        <div className="relative h-60 overflow-hidden sm:h-64">
+          <ScreenshotRotator
+            images={project.screenshots}
             alt={`${project.name} screenshot`}
-            fill
             sizes="(min-width: 1024px) 480px, 100vw"
-            className="object-cover object-top"
           />
         </div>
       ) : (

@@ -6,10 +6,10 @@ import { TechChips } from "./TechChips";
 export function ProjectCard({ project }: { project: Project }) {
   return (
     <article className="group flex h-full flex-col overflow-hidden rounded-xl border border-line bg-surface transition-all duration-300 hover:-translate-y-1 hover:border-amber/40">
-      {project.screenshot ? (
+      {project.screenshots?.length ? (
         <div className="relative h-36 overflow-hidden" aria-hidden="true">
           <Image
-            src={project.screenshot}
+            src={project.screenshots[0]}
             alt=""
             fill
             sizes="(min-width: 640px) 50vw, 100vw"

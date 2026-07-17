@@ -33,8 +33,9 @@ export interface Project {
   kind: "web" | "mobile";
   /** short URL shown in the mockup chrome */
   displayUrl?: string;
-  /** real screenshot path under /public — replaces the skeleton art when set */
-  screenshot?: string;
+  /** real screenshot paths under /public — replace the skeleton art when set;
+      multiple images crossfade in the device mockup */
+  screenshots?: string[];
 }
 
 export const projects: Project[] = [
@@ -68,7 +69,7 @@ export const projects: Project[] = [
     monogram: "SF",
     kind: "mobile",
     displayUrl: "play.google.com/studyforce",
-    screenshot: "/projects/studyforce.png",
+    screenshots: ["/projects/studyforce.png"],
   },
   {
     slug: "fbreach",
@@ -95,7 +96,7 @@ export const projects: Project[] = [
     monogram: "FB",
     kind: "web",
     displayUrl: "fbreach.onrender.com",
-    screenshot: "/projects/fbreach.png",
+    screenshots: ["/projects/fbreach.png"],
   },
   {
     slug: "gosharex",
@@ -126,7 +127,7 @@ export const projects: Project[] = [
     monogram: "GX",
     kind: "mobile",
     displayUrl: "GoShareX — ride sharing",
-    screenshot: "/projects/gosharex.png",
+    screenshots: ["/projects/gosharex.png"],
   },
   {
     slug: "practical-khata-bd",
@@ -152,7 +153,7 @@ export const projects: Project[] = [
     monogram: "PK",
     kind: "web",
     displayUrl: "practicalkhata.pro.bd",
-    screenshot: "/projects/practicalkhata.png",
+    screenshots: ["/projects/practicalkhata.png"],
   },
   {
     slug: "mehendihub",
@@ -199,7 +200,7 @@ export const projects: Project[] = [
     monogram: "CH",
     kind: "web",
     displayUrl: "Charulata — plant e-commerce",
-    screenshot: "/projects/charulata.png",
+    screenshots: ["/projects/charulata.png"],
   },
   {
     slug: "day-care-management",

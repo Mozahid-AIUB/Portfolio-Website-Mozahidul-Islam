@@ -22,7 +22,7 @@ export const profile = {
     "Before any of that, I built my fundamentals the hard way — competitive programming on Codeforces, data structures in C++, database normalization on Oracle, and an obstacle-avoiding robot programmed in embedded C. I also teach: mathematics and ICT to school students, and programming to beginners on YouTube. Explaining things clearly is an engineering skill too.",
   ],
   proofPoints: [
-    { value: "4", label: "products live in production" },
+    { value: "10+", label: "products built & shipped — 4 live in production" },
     { value: "50+", label: "Play Store installs & growing" },
     { value: "35", label: "public GitHub repositories" },
     { value: "5", label: "platforms shipped — mobile, web, SaaS, desktop, embedded" },

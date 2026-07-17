@@ -56,7 +56,7 @@ export const projects: Project[] = [
       "Took the app through Google Play review to a public production release.",
     ],
     impact:
-      "Live on the Play Store with active users and 50+ installs, now scaling into a multi-role EdTech platform with parent, student and teacher accounts.",
+      "Live on the Play Store with real, active users — now scaling into a multi-role EdTech platform with parent, student and teacher accounts.",
     tech: ["React Native", "TypeScript", "Firebase", "Expo"],
     links: [
       {

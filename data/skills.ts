@@ -23,7 +23,7 @@ export const skillGroups: SkillGroup[] = [
   {
     title: "Data & Infrastructure",
     note: "From ER design and normalization to realtime sync",
-    items: ["PostgreSQL", "Oracle DBMS", "PL/SQL", "MySQL", "Firebase", "Supabase", "Linux", "Git / GitHub"],
+    items: ["PostgreSQL", "Oracle DBMS", "PL/SQL", "MySQL", "Firebase", "Supabase", "Neon", "Linux", "Git / GitHub"],
   },
   {
     title: "Engineering practice",

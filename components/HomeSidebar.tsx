@@ -1,6 +1,5 @@
 "use client";
 
-import Link from "next/link";
 import Image from "next/image";
 import { useEffect, useState } from "react";
 import { motion, useReducedMotion } from "framer-motion";
@@ -15,13 +14,6 @@ const sections = [
   { id: "projects", label: "Projects" },
   { id: "research", label: "Research" },
   { id: "education", label: "Education" },
-];
-
-const pageLinks = [
-  { href: "/projects", label: "All projects" },
-  { href: "/experiments", label: "Experiments" },
-  { href: "/resume", label: "Resume" },
-  { href: "/contact", label: "Contact" },
 ];
 
 const entrance = {
@@ -168,32 +160,14 @@ export function HomeSidebar() {
           </ul>
         </motion.nav>
 
-        <motion.div
-          variants={entrance}
-          transition={{ duration: 0.55 }}
-          className="mt-8 hidden flex-wrap gap-x-5 gap-y-2 lg:flex"
-        >
-          {pageLinks.map((link) => (
-            <Link
-              key={link.href}
-              href={link.href}
-              className="font-mono text-xs text-muted transition-colors hover:text-amber"
-            >
-              {link.label} ↗
-            </Link>
-          ))}
-        </motion.div>
       </motion.div>
 
       <motion.div
         initial={reduce ? false : { opacity: 0 }}
         animate={{ opacity: 1 }}
         transition={{ delay: 0.6, duration: 0.5 }}
-        className="mt-10 flex items-center gap-5 lg:mt-0"
+        className="mt-10 flex items-center gap-5 border-t border-line pt-6 lg:mt-6"
       >
-        <span className="mr-1 font-mono text-[11px] text-muted">
-          DHK <LocalTime />
-        </span>
         <a
           href={profile.github}
           target="_blank"
@@ -235,6 +209,9 @@ export function HomeSidebar() {
             <path d="m3 6 9 7 9-7" />
           </svg>
         </a>
+        <span className="ml-auto font-mono text-[11px] text-muted">
+          DHK <LocalTime />
+        </span>
       </motion.div>
     </header>
   );

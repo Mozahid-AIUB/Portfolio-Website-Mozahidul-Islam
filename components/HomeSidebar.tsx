@@ -52,7 +52,7 @@ export function HomeSidebar() {
   }, []);
 
   return (
-    <header className="scrollbar-none relative py-16 lg:sticky lg:top-16 lg:flex lg:h-[calc(100vh-4rem)] lg:w-[44%] lg:flex-col lg:justify-between lg:overflow-y-auto lg:py-14">
+    <header className="scrollbar-none relative py-12 lg:sticky lg:top-16 lg:flex lg:h-[calc(100vh-4rem)] lg:w-[44%] lg:flex-col lg:justify-between lg:overflow-y-auto lg:py-10">
       <div className="absolute inset-0 -z-10 overflow-hidden" aria-hidden="true">
         <div className="aurora" />
       </div>
@@ -64,9 +64,9 @@ export function HomeSidebar() {
         <motion.div
           variants={entrance}
           transition={{ duration: 0.5 }}
-          className="mb-5"
+          className="flex items-end gap-5"
         >
-          <div className="relative h-24 w-20 overflow-hidden rounded-2xl border border-line shadow-2xl shadow-black/40">
+          <div className="relative h-28 w-24 shrink-0 overflow-hidden rounded-2xl border border-line shadow-2xl shadow-black/40">
             <Image
               src="/mozahid.jpg"
               alt={`Portrait of ${profile.name}`}
@@ -76,17 +76,11 @@ export function HomeSidebar() {
               className="object-cover object-top"
             />
           </div>
-        </motion.div>
-
-        <motion.p
-          variants={entrance}
-          transition={{ duration: 0.5 }}
-          className="font-mono text-xs tracking-[0.2em] text-amber"
-        >
-          ~/mozahid · {profile.location.toUpperCase()}
-        </motion.p>
-
-        <h1 className="mt-4 font-display text-4xl font-extrabold leading-[1.02] tracking-tight sm:text-5xl">
+          <div className="min-w-0 pb-0.5">
+            <p className="font-mono text-xs tracking-[0.2em] text-amber">
+              ~/mozahid · {profile.location.toUpperCase()}
+            </p>
+            <h1 className="mt-3 font-display text-4xl font-extrabold leading-[1.02] tracking-tight sm:text-5xl">
           {["Mozahidul", "Islam"].map((word, i) => (
             <span key={word} className="block overflow-hidden pb-0.5">
               <motion.span
@@ -103,7 +97,9 @@ export function HomeSidebar() {
               </motion.span>
             </span>
           ))}
-        </h1>
+            </h1>
+          </div>
+        </motion.div>
 
         <motion.h2
           variants={entrance}

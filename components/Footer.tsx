@@ -1,5 +1,6 @@
 import Link from "next/link";
 import { profile } from "@/data/profile";
+import { LocalTime } from "./LocalTime";
 
 const pages = [
   { href: "/", label: "Home" },
@@ -86,7 +87,7 @@ export function Footer() {
             ))}
           </ul>
           <p className="mt-6 font-mono text-xs text-muted/70">
-            {profile.location} · {profile.timezone}
+            {profile.location} · <LocalTime /> ({profile.timezone})
           </p>
         </div>
       </div>

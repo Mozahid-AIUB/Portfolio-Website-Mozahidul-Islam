@@ -5,7 +5,6 @@ import { useEffect, useState } from "react";
 import { motion, useReducedMotion } from "framer-motion";
 import { profile } from "@/data/profile";
 import { Typewriter } from "./Typewriter";
-import { LocalTime } from "./LocalTime";
 
 const sections = [
   { id: "about", label: "About" },
@@ -160,13 +159,6 @@ export function HomeSidebar() {
           </ul>
         </motion.nav>
 
-        <motion.p
-          variants={entrance}
-          transition={{ duration: 0.55 }}
-          className="mt-8 hidden font-mono text-[11px] text-muted lg:block"
-        >
-          DHAKA <LocalTime /> · GMT+6
-        </motion.p>
       </motion.div>
     </header>
   );

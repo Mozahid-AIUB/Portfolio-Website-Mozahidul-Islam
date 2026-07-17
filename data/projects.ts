@@ -69,7 +69,12 @@ export const projects: Project[] = [
     monogram: "SF",
     kind: "mobile",
     displayUrl: "play.google.com/studyforce",
-    screenshots: ["/projects/studyforce.png"],
+    screenshots: [
+      "/projects/studyforce.png",
+      "/projects/studyforce-2.png",
+      "/projects/studyforce-3.png",
+      "/projects/studyforce-4.png",
+    ],
   },
   {
     slug: "fbreach",

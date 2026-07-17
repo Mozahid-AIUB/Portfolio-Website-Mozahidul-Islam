@@ -1,6 +1,7 @@
 "use client";
 
 import Link from "next/link";
+import Image from "next/image";
 import { useEffect, useState } from "react";
 import { motion, useReducedMotion } from "framer-motion";
 import { profile } from "@/data/profile";
@@ -49,7 +50,7 @@ export function HomeSidebar() {
   }, []);
 
   return (
-    <header className="relative py-16 lg:sticky lg:top-16 lg:flex lg:h-[calc(100vh-4rem)] lg:w-[44%] lg:flex-col lg:justify-between lg:py-20">
+    <header className="relative py-16 lg:sticky lg:top-16 lg:flex lg:h-[calc(100vh-4rem)] lg:w-[44%] lg:flex-col lg:justify-between lg:overflow-y-auto lg:py-14">
       <div
         className="glow-blob absolute -left-20 top-4 -z-10 h-72 w-72 rounded-full"
         aria-hidden="true"
@@ -59,6 +60,23 @@ export function HomeSidebar() {
         animate="show"
         transition={{ staggerChildren: 0.1 }}
       >
+        <motion.div
+          variants={entrance}
+          transition={{ duration: 0.5 }}
+          className="mb-7"
+        >
+          <div className="relative h-28 w-24 overflow-hidden rounded-2xl border border-line shadow-2xl shadow-black/40">
+            <Image
+              src="/mozahid.jpg"
+              alt={`Portrait of ${profile.name}`}
+              fill
+              sizes="96px"
+              priority
+              className="object-cover object-top"
+            />
+          </div>
+        </motion.div>
+
         <motion.p
           variants={entrance}
           transition={{ duration: 0.5 }}

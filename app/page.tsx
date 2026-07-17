@@ -265,8 +265,9 @@ export default function Home() {
                   Need an engineer who ships?
                 </h2>
                 <p className="mt-3 max-w-md text-muted">
-                  I work remote-first from {profile.location} ({profile.timezone})
-                  and overlap comfortably with US and European hours.
+                  Based in {profile.location} ({profile.timezone}), I overlap
+                  comfortably with US and European hours — remote, hybrid, or
+                  on-site with relocation.
                 </p>
                 <Magnetic className="mt-6">
                   <Link

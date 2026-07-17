@@ -7,7 +7,7 @@ import { profile } from "@/data/profile";
 export const metadata: Metadata = {
   title: "Contact",
   description:
-    "Get in touch about remote software engineering roles or projects.",
+    "Get in touch about software engineering roles — remote or on-site — or projects.",
 };
 
 const directLinks = [

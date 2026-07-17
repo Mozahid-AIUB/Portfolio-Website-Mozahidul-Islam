@@ -9,7 +9,7 @@ export const profile = {
     "From a study planner live on the Play Store to a multi-tenant SaaS platform — I own products end to end: architecture, build, security, deployment, and everything in between.",
   location: "Dhaka, Bangladesh",
   timezone: "GMT+6",
-  openTo: "Open to remote software engineering roles",
+  openTo: "Open to software engineering roles — remote or on-site",
   email: "mozahidul.islam.ai@gmail.com",
   phone: "+880 1707 591 255",
   github: "https://github.com/Mozahid-AIUB",

@@ -37,7 +37,7 @@ export default function OgImage() {
               background: "#4ade80",
             }}
           />
-          Open to remote software engineering roles
+          Open to software engineering roles — remote or on-site
         </div>
         <div
           style={{

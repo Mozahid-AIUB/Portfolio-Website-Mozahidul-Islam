@@ -30,7 +30,7 @@ export function Footer() {
           </Link>
           <p className="mt-4 max-w-xs text-sm leading-relaxed text-muted">
             Software engineer &amp; researcher shipping production software
-            from Dhaka — open to remote roles worldwide.
+            from Dhaka — open to remote and on-site roles worldwide.
           </p>
           <p className="mt-6 inline-flex items-center gap-2.5 rounded-full border border-line bg-surface px-4 py-1.5 font-mono text-xs text-muted">
             <span

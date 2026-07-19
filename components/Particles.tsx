@@ -12,10 +12,12 @@ async function initEngine(engine: Engine) {
 function ParticlesLayer() {
   const [light, setLight] = useState(false);
   const [reducedMotion, setReducedMotion] = useState(false);
+  const [canHover, setCanHover] = useState(false);
 
   useEffect(() => {
     setReducedMotion(window.matchMedia("(prefers-reduced-motion: reduce)").matches);
     setLight(document.documentElement.classList.contains("light"));
+    setCanHover(window.matchMedia("(hover: hover) and (pointer: fine)").matches);
 
     const observer = new MutationObserver(() => {
       setLight(document.documentElement.classList.contains("light"));
@@ -54,7 +56,7 @@ function ParticlesLayer() {
       },
       interactivity: {
         events: {
-          onHover: { enable: true, mode: "grab" },
+          onHover: { enable: canHover, mode: "grab" },
           resize: { enable: true },
         },
         modes: {
@@ -66,7 +68,7 @@ function ParticlesLayer() {
       },
       detectRetina: true,
     }),
-    [amber, light]
+    [amber, light, canHover]
   );
 
   if (reducedMotion) return null;

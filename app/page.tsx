@@ -6,6 +6,7 @@ import { Reveal } from "@/components/Reveal";
 import { StatusBadge } from "@/components/StatusBadge";
 import { ShowcaseProject } from "@/components/ShowcaseProject";
 import { CountUp } from "@/components/CountUp";
+import { OrbitVisual } from "@/components/OrbitVisual";
 import { profile } from "@/data/profile";
 import { featuredProjects } from "@/data/projects";
 import { experience } from "@/data/experience";
@@ -36,9 +37,14 @@ export default function Home() {
         <div className="lg:flex lg:justify-between lg:gap-12">
           <HomeSidebar />
 
-          <main className="pb-32 lg:w-[52%] lg:pb-40 lg:pt-24">
+          <main className="overflow-x-hidden pb-32 lg:w-[52%] lg:overflow-x-visible lg:pb-40 lg:pt-24">
+            {/* Orbit hero */}
+            <Reveal>
+              <OrbitVisual />
+            </Reveal>
+
             {/* About */}
-            <section id="about" className="scroll-mt-24">
+            <section id="about" className="mt-4 scroll-mt-24">
               <SectionLabel>About</SectionLabel>
               <Reveal className="space-y-5 leading-relaxed text-muted">
                 {profile.about.map((paragraph) => (

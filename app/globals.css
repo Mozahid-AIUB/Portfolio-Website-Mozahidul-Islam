@@ -103,6 +103,80 @@ h3 {
   border-radius: 2px;
 }
 
+/* Orbit visual — CSS-driven ring rotation, GPU-accelerated */
+@keyframes orbit-spin {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+@keyframes orbit-spin-reverse {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(-360deg);
+  }
+}
+
+.orbit-spin {
+  animation: orbit-spin linear infinite;
+}
+
+.orbit-spin-reverse {
+  animation: orbit-spin-reverse linear infinite;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .orbit-spin,
+  .orbit-spin-reverse {
+    animation: none;
+  }
+}
+
+.orbit-container {
+  width: 260px;
+  height: 260px;
+}
+
+.orbit-scale {
+  transform-origin: center center;
+  transform: translate(-50%, -50%) scale(0.6);
+}
+
+@media (min-width: 400px) {
+  .orbit-container {
+    width: 320px;
+    height: 320px;
+  }
+  .orbit-scale {
+    transform: translate(-50%, -50%) scale(0.74);
+  }
+}
+
+@media (min-width: 640px) {
+  .orbit-container {
+    width: 380px;
+    height: 380px;
+  }
+  .orbit-scale {
+    transform: translate(-50%, -50%) scale(0.9);
+  }
+}
+
+@media (min-width: 768px) {
+  .orbit-container {
+    width: 420px;
+    height: 420px;
+  }
+  .orbit-scale {
+    transform: translate(-50%, -50%) scale(1);
+  }
+}
+
 /* Subtle grid texture behind the hero only */
 .hero-grid {
   background-image: linear-gradient(var(--line) 1px, transparent 1px),

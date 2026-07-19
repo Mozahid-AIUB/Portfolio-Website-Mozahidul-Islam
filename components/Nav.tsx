@@ -49,7 +49,7 @@ export function Nav() {
                   key={link.href}
                   href={link.href}
                   data-active={active}
-                  className={`nav-link rounded-md px-3 py-1.5 font-mono text-[11px] font-medium uppercase tracking-[0.16em] transition-colors ${
+                  className={`nav-link rounded-md px-3 py-1.5 font-mono text-[11px] font-normal uppercase tracking-[0.16em] transition-colors ${
                     active
                       ? "bg-amber-dim text-amber"
                       : "text-muted hover:text-text"

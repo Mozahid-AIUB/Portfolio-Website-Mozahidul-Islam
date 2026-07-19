@@ -284,10 +284,16 @@ export function OrbitVisual() {
       >
         <div className="absolute inset-1 rounded-full bg-gradient-to-br from-white/25 to-transparent" />
         <span
-          className="relative flex h-full w-full items-center justify-center font-display text-lg font-extrabold tracking-tight text-bg"
+          className="relative flex h-full w-full items-center justify-center font-display text-lg font-bold"
           style={{
-            textShadow:
-              "0 1px 0 rgba(255,255,255,0.35), 0 -1px 1px rgba(0,0,0,0.25)",
+            letterSpacing: "0.015em",
+            background:
+              "linear-gradient(180deg, #3a2508 0%, #1a1004 100%)",
+            WebkitBackgroundClip: "text",
+            backgroundClip: "text",
+            color: "transparent",
+            textShadow: "0 1px 0 rgba(255,255,255,0.4)",
+            filter: "drop-shadow(0 1px 1px rgba(0,0,0,0.15))",
           }}
         >
           Mozahid

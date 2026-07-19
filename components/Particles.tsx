@@ -75,7 +75,7 @@ function ParticlesLayer() {
     <Particles
       id="site-particles"
       aria-hidden="true"
-      className="pointer-events-auto fixed inset-0 z-0"
+      className="pointer-events-none fixed inset-0 z-0 lg:pointer-events-auto"
       options={options}
     />
   );

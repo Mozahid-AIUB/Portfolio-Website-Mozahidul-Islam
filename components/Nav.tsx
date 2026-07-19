@@ -74,7 +74,7 @@ export function Nav() {
                 href="/contact"
                 className="beam-border block rounded-full border border-amber/30 bg-amber-dim px-4 py-1.5 text-sm font-semibold text-amber transition-colors hover:bg-amber hover:text-bg"
               >
-                Hire me
+                Let's talk
               </Link>
             </Magnetic>
           </div>
@@ -129,14 +129,14 @@ export function Nav() {
               onClick={() => setOpen(false)}
               className="mt-8 block rounded-full bg-amber px-6 py-3 text-center text-[15px] font-semibold text-bg"
             >
-              Hire me →
+              Let's talk →
             </Link>
             <p className="mt-6 flex items-center gap-2 font-mono text-xs text-muted">
               <span
                 className="status-dot status-dot--pulse inline-block h-1.5 w-1.5 rounded-full bg-live text-live"
                 aria-hidden="true"
               />
-              Available for work — replies within 24h
+              Available for work — replies within 12h
             </p>
           </div>
         </div>

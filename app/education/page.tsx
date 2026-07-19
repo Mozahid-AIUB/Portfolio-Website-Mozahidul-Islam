@@ -2,7 +2,6 @@ import type { Metadata } from "next";
 import { SectionHeading } from "@/components/SectionHeading";
 import { Reveal } from "@/components/Reveal";
 import { education, certifications } from "@/data/education";
-import { profile } from "@/data/profile";
 
 export const metadata: Metadata = {
   title: "Education",
@@ -68,20 +67,6 @@ export default function EducationPage() {
           ))}
         </div>
       </div>
-
-      <Reveal>
-        <p className="mt-16 text-center font-mono text-sm text-muted">
-          Competitive programming:{" "}
-          <a
-            href={profile.codeforces}
-            target="_blank"
-            rel="noopener noreferrer"
-            className="text-amber hover:opacity-80"
-          >
-            Codeforces profile ↗
-          </a>
-        </p>
-      </Reveal>
     </div>
   );
 }

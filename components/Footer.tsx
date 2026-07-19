@@ -77,7 +77,7 @@ export function Footer() {
               className="status-dot status-dot--pulse inline-block h-1.5 w-1.5 rounded-full bg-live text-live"
               aria-hidden="true"
             />
-            Available for work — replies within 24h
+            Available for work — replies within 12h
           </p>
           <dl className="mt-8 flex gap-8 border-t border-line pt-6">
             {stats.map((stat) => (

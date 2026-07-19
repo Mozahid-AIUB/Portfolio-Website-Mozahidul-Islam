@@ -8,7 +8,7 @@ import {
 import "./globals.css";
 import { Nav } from "@/components/Nav";
 import { Footer } from "@/components/Footer";
-import { Particles } from "@/components/Particles";
+import { ParticlesBackground } from "@/components/Particles";
 import { CursorGlow } from "@/components/CursorGlow";
 import { SmoothScroll } from "@/components/SmoothScroll";
 import { Preloader } from "@/components/Preloader";
@@ -146,7 +146,7 @@ export default function RootLayout({
         <Preloader />
         <SmoothScroll />
         <CommandPalette />
-        <Particles />
+        <ParticlesBackground />
         <CursorGlow />
         <div aria-hidden="true" className="grain" />
         <Nav />

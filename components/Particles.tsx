@@ -1,103 +1,90 @@
 "use client";
 
-import { useEffect, useRef } from "react";
+import { useEffect, useMemo, useState } from "react";
+import { Particles, ParticlesProvider } from "@tsparticles/react";
+import { loadSlim } from "@tsparticles/slim";
+import type { Engine, ISourceOptions } from "@tsparticles/engine";
 
-interface Star {
-  x: number;
-  y: number;
-  r: number;
-  vx: number;
-  vy: number;
-  phase: number;
-  speed: number;
+async function initEngine(engine: Engine) {
+  await loadSlim(engine);
 }
 
-export function Particles() {
-  const canvasRef = useRef<HTMLCanvasElement>(null);
+function ParticlesLayer() {
+  const [light, setLight] = useState(false);
+  const [reducedMotion, setReducedMotion] = useState(false);
 
   useEffect(() => {
-    if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
+    setReducedMotion(window.matchMedia("(prefers-reduced-motion: reduce)").matches);
+    setLight(document.documentElement.classList.contains("light"));
 
-    const canvas = canvasRef.current;
-    if (!canvas) return;
-    const ctx = canvas.getContext("2d");
-    if (!ctx) return;
-
-    let width = 0;
-    let height = 0;
-    let stars: Star[] = [];
-    let raf = 0;
-    let running = true;
-
-    function resize() {
-      if (!canvas) return;
-      const dpr = Math.min(window.devicePixelRatio || 1, 2);
-      width = window.innerWidth;
-      height = window.innerHeight;
-      canvas.width = width * dpr;
-      canvas.height = height * dpr;
-      ctx?.setTransform(dpr, 0, 0, dpr, 0, 0);
-      const count = Math.min(90, Math.floor((width * height) / 22000));
-      stars = Array.from({ length: count }, () => ({
-        x: Math.random() * width,
-        y: Math.random() * height,
-        r: 0.6 + Math.random() * 1.3,
-        vx: (Math.random() - 0.5) * 0.12,
-        vy: (Math.random() - 0.5) * 0.12,
-        phase: Math.random() * Math.PI * 2,
-        speed: 0.008 + Math.random() * 0.012,
-      }));
-    }
-
-    function frame() {
-      if (!running || !ctx) return;
-      ctx.clearRect(0, 0, width, height);
-      const light = document.documentElement.classList.contains("light");
-      for (const s of stars) {
-        s.x += s.vx;
-        s.y += s.vy;
-        s.phase += s.speed;
-        if (s.x < -4) s.x = width + 4;
-        if (s.x > width + 4) s.x = -4;
-        if (s.y < -4) s.y = height + 4;
-        if (s.y > height + 4) s.y = -4;
-        const twinkle = 0.35 + 0.65 * (0.5 + 0.5 * Math.sin(s.phase));
-        ctx.beginPath();
-        ctx.arc(s.x, s.y, s.r, 0, Math.PI * 2);
-        ctx.fillStyle = light
-          ? `rgba(91, 103, 121, ${0.28 * twinkle})`
-          : `rgba(233, 238, 246, ${0.4 * twinkle})`;
-        ctx.fill();
-      }
-      raf = requestAnimationFrame(frame);
-    }
-
-    function onVisibility() {
-      running = document.visibilityState === "visible";
-      if (running) {
-        raf = requestAnimationFrame(frame);
-      } else {
-        cancelAnimationFrame(raf);
-      }
-    }
-
-    resize();
-    raf = requestAnimationFrame(frame);
-    window.addEventListener("resize", resize);
-    document.addEventListener("visibilitychange", onVisibility);
-
-    return () => {
-      cancelAnimationFrame(raf);
-      window.removeEventListener("resize", resize);
-      document.removeEventListener("visibilitychange", onVisibility);
-    };
+    const observer = new MutationObserver(() => {
+      setLight(document.documentElement.classList.contains("light"));
+    });
+    observer.observe(document.documentElement, { attributes: true, attributeFilter: ["class"] });
+    return () => observer.disconnect();
   }, []);
 
+  const amber = light ? "#9c6f00" : "#f5b841";
+
+  const options: ISourceOptions = useMemo(
+    () => ({
+      fullScreen: { enable: false },
+      background: { color: "transparent" },
+      fpsLimit: 60,
+      particles: {
+        number: { value: 80, density: { enable: true, width: 1920, height: 1080 } },
+        color: { value: amber },
+        opacity: { value: light ? 0.35 : 0.5 },
+        size: { value: { min: 1, max: 2 } },
+        links: {
+          enable: true,
+          distance: 130,
+          color: amber,
+          opacity: light ? 0.16 : 0.22,
+          width: 1,
+        },
+        move: {
+          enable: true,
+          speed: 0.4,
+          direction: "none",
+          random: true,
+          straight: false,
+          outModes: { default: "out" },
+        },
+      },
+      interactivity: {
+        events: {
+          onHover: { enable: true, mode: "grab" },
+          resize: { enable: true },
+        },
+        modes: {
+          grab: {
+            distance: 180,
+            links: { opacity: light ? 0.45 : 0.6 },
+          },
+        },
+      },
+      detectRetina: true,
+    }),
+    [amber, light]
+  );
+
+  if (reducedMotion) return null;
+
   return (
-    <canvas
-      ref={canvasRef}
+    <Particles
+      id="site-particles"
       aria-hidden="true"
-      className="pointer-events-none fixed inset-0 z-0"
+      className="pointer-events-auto fixed inset-0 z-0"
+      options={options}
     />
+  );
+}
+
+export function ParticlesBackground() {
+  return (
+    <ParticlesProvider init={initEngine}>
+      <ParticlesLayer />
+    </ParticlesProvider>
   );
 }

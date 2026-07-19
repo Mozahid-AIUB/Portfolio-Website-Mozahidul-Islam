@@ -75,7 +75,7 @@ export default function ProjectsPage() {
               rel="noopener noreferrer"
               className="mt-5 inline-block font-mono text-sm text-amber hover:opacity-80"
             >
-              Browse all 35 repos on GitHub ↗
+              Browse all 37 repos on GitHub ↗
             </a>
           </div>
         </Reveal>

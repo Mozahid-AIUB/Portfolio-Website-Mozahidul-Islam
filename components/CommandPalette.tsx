@@ -1,15 +1,39 @@
 "use client";
 
-import { useEffect, useMemo, useRef, useState } from "react";
+import { useEffect, useMemo, useRef, useState, type ReactNode } from "react";
 import { useRouter } from "next/navigation";
 import { AnimatePresence, motion } from "framer-motion";
 import { profile } from "@/data/profile";
 
+type Group = "Navigate" | "Actions" | "Links";
+
 interface Command {
   label: string;
-  hint: string;
+  group: Group;
   run: () => void;
 }
+
+const ICONS: Record<Group, ReactNode> = {
+  Navigate: (
+    <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.75">
+      <path d="M9 6l6 6-6 6" strokeLinecap="round" strokeLinejoin="round" />
+    </svg>
+  ),
+  Actions: (
+    <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.75">
+      <path d="M13 3 4 14h6l-1 7 9-11h-6l1-7z" strokeLinecap="round" strokeLinejoin="round" />
+    </svg>
+  ),
+  Links: (
+    <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.75">
+      <path
+        d="M10 14a4 4 0 0 0 6 0l3-3a4 4 0 0 0-6-6l-1.5 1.5M14 10a4 4 0 0 0-6 0l-3 3a4 4 0 0 0 6 6l1.5-1.5"
+        strokeLinecap="round"
+        strokeLinejoin="round"
+      />
+    </svg>
+  ),
+};
 
 export function CommandPalette() {
   const [open, setOpen] = useState(false);
@@ -20,20 +44,20 @@ export function CommandPalette() {
 
   const commands: Command[] = useMemo(
     () => [
-      { label: "About", hint: "Section", run: () => (window.location.href = "/#about") },
-      { label: "Skills", hint: "Section", run: () => (window.location.href = "/#skills") },
-      { label: "Experience", hint: "Section", run: () => (window.location.href = "/#experience") },
-      { label: "Featured projects", hint: "Section", run: () => (window.location.href = "/#projects") },
-      { label: "All projects", hint: "Page", run: () => router.push("/projects") },
-      { label: "Education & certifications", hint: "Page", run: () => router.push("/education") },
-      { label: "Research & publications", hint: "Page", run: () => router.push("/experiments") },
-      { label: "Resume", hint: "Page", run: () => router.push("/resume") },
-      { label: "Contact", hint: "Page", run: () => router.push("/contact") },
-      { label: "Download CV", hint: "Action", run: () => window.open(profile.cvPath, "_blank") },
-      { label: "Email me", hint: "Action", run: () => (window.location.href = `mailto:${profile.email}`) },
+      { label: "About", group: "Navigate", run: () => (window.location.href = "/#about") },
+      { label: "Skills", group: "Navigate", run: () => (window.location.href = "/#skills") },
+      { label: "Experience", group: "Navigate", run: () => (window.location.href = "/#experience") },
+      { label: "Featured projects", group: "Navigate", run: () => (window.location.href = "/#projects") },
+      { label: "All projects", group: "Navigate", run: () => router.push("/projects") },
+      { label: "Education & certifications", group: "Navigate", run: () => router.push("/education") },
+      { label: "Research & publications", group: "Navigate", run: () => router.push("/experiments") },
+      { label: "Resume", group: "Navigate", run: () => router.push("/resume") },
+      { label: "Contact", group: "Navigate", run: () => router.push("/contact") },
+      { label: "Download CV", group: "Actions", run: () => window.open(profile.cvPath, "_blank") },
+      { label: "Email me", group: "Actions", run: () => (window.location.href = `mailto:${profile.email}`) },
       {
         label: "Toggle theme",
-        hint: "Action",
+        group: "Actions",
         run: () => {
           const light = document.documentElement.classList.toggle("light");
           try {
@@ -43,9 +67,9 @@ export function CommandPalette() {
           }
         },
       },
-      { label: "GitHub", hint: "Link", run: () => window.open(profile.github, "_blank") },
-      { label: "LinkedIn", hint: "Link", run: () => window.open(profile.linkedin, "_blank") },
-      { label: "Codeforces", hint: "Link", run: () => window.open(profile.codeforces, "_blank") },
+      { label: "GitHub", group: "Links", run: () => window.open(profile.github, "_blank") },
+      { label: "LinkedIn", group: "Links", run: () => window.open(profile.linkedin, "_blank") },
+      { label: "Codeforces", group: "Links", run: () => window.open(profile.codeforces, "_blank") },
     ],
     [router]
   );
@@ -53,6 +77,9 @@ export function CommandPalette() {
   const filtered = commands.filter((c) =>
     c.label.toLowerCase().includes(query.toLowerCase())
   );
+
+  const groups: Group[] = ["Navigate", "Actions", "Links"];
+  let flatCursor = -1;
 
   useEffect(() => {
     function onKey(e: KeyboardEvent) {
@@ -120,12 +147,12 @@ export function CommandPalette() {
             initial={{ opacity: 0, scale: 0.97, y: -8 }}
             animate={{ opacity: 1, scale: 1, y: 0 }}
             exit={{ opacity: 0, scale: 0.97, y: -8 }}
-            transition={{ duration: 0.18 }}
-            className="w-full max-w-lg overflow-hidden rounded-xl border border-line bg-surface shadow-2xl shadow-black/50"
+            transition={{ duration: 0.18, ease: [0.16, 1, 0.3, 1] }}
+            className="w-full max-w-lg overflow-hidden rounded-xl border border-line bg-surface shadow-2xl shadow-black/60 ring-1 ring-black/5"
             onClick={(e) => e.stopPropagation()}
           >
-            <div className="flex items-center gap-3 border-b border-line px-4">
-              <span className="text-muted" aria-hidden="true">
+            <div className="flex items-center gap-3 border-b border-line px-4 focus-within:border-amber/40">
+              <span className="text-amber/70" aria-hidden="true">
                 <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
                   <circle cx="11" cy="11" r="7" />
                   <path d="m20 20-3.5-3.5" />
@@ -140,43 +167,88 @@ export function CommandPalette() {
                 }}
                 onKeyDown={onInputKey}
                 placeholder="Type a command or search…"
-                className="w-full bg-transparent py-3.5 text-[15px] text-text placeholder:text-muted/60 focus:outline-none"
+                className="w-full appearance-none bg-transparent py-3.5 text-[15px] text-text placeholder:text-muted/60 [&]:outline-none [&]:focus:outline-none [&]:focus-visible:outline-none"
+                style={{ outline: "none", boxShadow: "none" }}
                 aria-label="Search commands"
               />
               <kbd className="rounded border border-line px-1.5 py-0.5 font-mono text-[10px] text-muted">
                 esc
               </kbd>
             </div>
-            <ul className="max-h-72 overflow-y-auto p-2" role="listbox">
+            <ul className="max-h-80 overflow-y-auto p-2" role="listbox">
               {filtered.length === 0 && (
-                <li className="px-3 py-6 text-center text-sm text-muted">
+                <li className="px-3 py-8 text-center text-sm text-muted">
                   No matches. Try &ldquo;projects&rdquo; or &ldquo;email&rdquo;.
                 </li>
               )}
-              {filtered.map((cmd, i) => (
-                <li key={cmd.label} role="option" aria-selected={i === index}>
-                  <button
-                    type="button"
-                    onClick={() => run(cmd)}
-                    onMouseEnter={() => setIndex(i)}
-                    className={`flex w-full items-center justify-between rounded-lg px-3 py-2.5 text-left text-sm transition-colors ${
-                      i === index
-                        ? "bg-amber-dim text-text"
-                        : "text-muted"
-                    }`}
-                  >
-                    <span>{cmd.label}</span>
-                    <span
-                      className={`font-mono text-[10px] uppercase tracking-widest ${
-                        i === index ? "text-amber" : "text-muted/60"
-                      }`}
-                    >
-                      {cmd.hint}
-                    </span>
-                  </button>
-                </li>
-              ))}
+              {groups.map((group) => {
+                const items = filtered.filter((c) => c.group === group);
+                if (items.length === 0) return null;
+                return (
+                  <li key={group} role="presentation">
+                    <p className="px-3 pb-1 pt-2.5 font-mono text-[10px] uppercase tracking-[0.15em] text-muted/60">
+                      {group}
+                    </p>
+                    <ul role="group" aria-label={group}>
+                      {items.map((cmd) => {
+                        flatCursor += 1;
+                        const i = flatCursor;
+                        const selected = i === index;
+                        return (
+                          <li key={cmd.label} role="option" aria-selected={selected}>
+                            <button
+                              type="button"
+                              onClick={() => run(cmd)}
+                              onMouseEnter={() => setIndex(i)}
+                              className={`group relative flex w-full items-center gap-2.5 rounded-lg px-3 py-2.5 text-left text-sm transition-colors ${
+                                selected ? "bg-amber-dim text-text" : "text-muted"
+                              }`}
+                            >
+                              <span
+                                className={`absolute left-0 top-1/2 h-4 w-[2px] -translate-y-1/2 rounded-full bg-amber transition-opacity ${
+                                  selected ? "opacity-100" : "opacity-0"
+                                }`}
+                                aria-hidden="true"
+                              />
+                              <span
+                                className={`flex h-6 w-6 shrink-0 items-center justify-center rounded-md border transition-colors ${
+                                  selected
+                                    ? "border-amber/40 text-amber"
+                                    : "border-line text-muted/70"
+                                }`}
+                                aria-hidden="true"
+                              >
+                                {ICONS[cmd.group]}
+                              </span>
+                              <span className="flex-1">{cmd.label}</span>
+                              {selected && (
+                                <kbd className="rounded border border-amber/30 bg-bg/40 px-1.5 py-0.5 font-mono text-[10px] text-amber">
+                                  ↵
+                                </kbd>
+                              )}
+                            </button>
+                          </li>
+                        );
+                      })}
+                    </ul>
+                  </li>
+                );
+              })}
             </ul>
+            <div className="flex items-center gap-4 border-t border-line px-4 py-2.5 font-mono text-[10px] text-muted/70">
+              <span className="flex items-center gap-1.5">
+                <kbd className="rounded border border-line px-1.5 py-0.5">↑↓</kbd>
+                navigate
+              </span>
+              <span className="flex items-center gap-1.5">
+                <kbd className="rounded border border-line px-1.5 py-0.5">↵</kbd>
+                select
+              </span>
+              <span className="ml-auto flex items-center gap-1.5">
+                <kbd className="rounded border border-line px-1.5 py-0.5">esc</kbd>
+                close
+              </span>
+            </div>
           </motion.div>
         </motion.div>
       )}

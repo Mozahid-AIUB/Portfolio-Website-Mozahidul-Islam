@@ -12,6 +12,11 @@ export const metadata: Metadata = {
 
 const directLinks = [
   { label: "Email", value: profile.email, href: `mailto:${profile.email}` },
+  {
+    label: "WhatsApp",
+    value: profile.phone,
+    href: `https://wa.me/${profile.phone.replace(/\D/g, "")}`,
+  },
   { label: "GitHub", value: "Mozahid-AIUB", href: profile.github },
   {
     label: "LinkedIn",
@@ -57,7 +62,7 @@ export default function ContactPage() {
                   className="status-dot status-dot--pulse inline-block h-1.5 w-1.5 rounded-full bg-live text-live"
                   aria-hidden="true"
                 />
-                Usually replies within 24 hours
+                Usually replies within 12 hours
               </div>
             </div>
           </div>

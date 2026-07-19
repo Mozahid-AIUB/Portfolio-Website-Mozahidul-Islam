@@ -14,16 +14,19 @@ export function CountUp({
   const target = match ? parseFloat(match[1]) : 0;
   const suffix = match ? match[2] : "";
   const ref = useRef<HTMLSpanElement>(null);
-  const inView = useInView(ref, { once: true, margin: "-40px" });
+  const inView = useInView(ref, { once: true, amount: 0 });
   const reduce = useReducedMotion();
-  const [display, setDisplay] = useState(0);
+  const [display, setDisplay] = useState(target);
+  const animated = useRef(false);
 
   useEffect(() => {
-    if (!inView) return;
+    if (!inView || animated.current) return;
+    animated.current = true;
     if (reduce) {
       setDisplay(target);
       return;
     }
+    setDisplay(0);
     const start = performance.now();
     const duration = 1300;
     let raf = 0;
@@ -36,6 +39,15 @@ export function CountUp({
     raf = requestAnimationFrame(tick);
     return () => cancelAnimationFrame(raf);
   }, [inView, target, reduce]);
+
+  // Safety net: if IntersectionObserver never fires (some mobile
+  // webviews), don't leave the counter stuck at 0 forever.
+  useEffect(() => {
+    const timer = setTimeout(() => {
+      if (!animated.current) setDisplay(target);
+    }, 2000);
+    return () => clearTimeout(timer);
+  }, [target]);
 
   if (!match) {
     return (

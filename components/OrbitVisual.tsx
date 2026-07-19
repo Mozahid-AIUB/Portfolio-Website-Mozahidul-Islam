@@ -257,16 +257,18 @@ export function OrbitVisual() {
         ))}
       </div>
 
-      {/* Center sphere */}
+      {/* Center core — dark glass disc with an amber rim-light, so the
+          "Mozahid" label reads as crisp foreground text instead of being
+          swallowed by a solid gold fill */}
       <div
         className="absolute -translate-x-1/2 -translate-y-1/2 rounded-full"
         style={{
           left: CENTER,
           top: CENTER,
-          width: SPHERE_RADIUS * 2 + 32,
-          height: SPHERE_RADIUS * 2 + 32,
-          background: "radial-gradient(circle, rgba(245,184,65,0.22), transparent 70%)",
-          filter: "blur(20px)",
+          width: SPHERE_RADIUS * 2 + 44,
+          height: SPHERE_RADIUS * 2 + 44,
+          background: "radial-gradient(circle, rgba(245,184,65,0.28), transparent 72%)",
+          filter: "blur(18px)",
         }}
       />
       <div
@@ -277,23 +279,24 @@ export function OrbitVisual() {
           width: SPHERE_RADIUS * 2,
           height: SPHERE_RADIUS * 2,
           background:
-            "radial-gradient(circle at 35% 30%, #ffffff55 0%, #fde5ab 15%, var(--amber) 50%, #92600f 100%)",
+            "radial-gradient(circle at 50% 38%, #1c2436 0%, #131a29 55%, #0d1220 100%)",
+          border: "1.5px solid rgba(245,184,65,0.55)",
           boxShadow:
-            "0 0 45px 12px rgba(245,184,65,0.26), 0 0 90px 28px rgba(245,184,65,0.12), inset -10px -10px 30px rgba(0,0,0,0.3)",
+            "0 0 0 1px rgba(245,184,65,0.12), 0 0 32px 6px rgba(245,184,65,0.22), 0 8px 28px rgba(0,0,0,0.55), inset 0 1px 1px rgba(255,255,255,0.08), inset 0 -14px 22px rgba(245,184,65,0.14)",
         }}
       >
-        <div className="absolute inset-1 rounded-full bg-gradient-to-br from-white/25 to-transparent" />
-        <span
-          className="relative flex h-full w-full items-center justify-center font-display text-lg font-bold"
+        <div
+          className="absolute inset-0 rounded-full"
           style={{
-            letterSpacing: "0.015em",
             background:
-              "linear-gradient(180deg, #3a2508 0%, #1a1004 100%)",
-            WebkitBackgroundClip: "text",
-            backgroundClip: "text",
-            color: "transparent",
-            textShadow: "0 1px 0 rgba(255,255,255,0.4)",
-            filter: "drop-shadow(0 1px 1px rgba(0,0,0,0.15))",
+              "linear-gradient(155deg, rgba(255,255,255,0.10) 0%, transparent 40%)",
+          }}
+        />
+        <span
+          className="relative flex h-full w-full items-center justify-center font-display text-lg font-bold text-text"
+          style={{
+            letterSpacing: "0.01em",
+            textShadow: "0 1px 8px rgba(245,184,65,0.35)",
           }}
         >
           Mozahid

@@ -77,7 +77,11 @@ body {
   color: var(--text);
   font-family: var(--font-sans);
   font-size: 1.0625rem;
-  line-height: 1.7;
+  font-weight: 450;
+  line-height: 1.75;
+  letter-spacing: -0.006em;
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
   transition: background-color 0.35s ease, color 0.35s ease;
 }
 

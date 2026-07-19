@@ -80,13 +80,13 @@ export function Nav() {
           </div>
         </div>
 
-        <div className="flex items-center gap-2 md:hidden">
+        <div className="relative z-50 flex items-center gap-2 md:hidden">
           <ThemeToggle />
           <button
             type="button"
             aria-label={open ? "Close menu" : "Open menu"}
             aria-expanded={open}
-            className="flex h-10 w-10 items-center justify-center rounded-md text-muted hover:text-text"
+            className="relative z-50 flex h-10 w-10 items-center justify-center rounded-md text-muted hover:text-text"
             onClick={() => setOpen((v) => !v)}
           >
             <svg width="20" height="20" viewBox="0 0 20 20" fill="none" aria-hidden="true">

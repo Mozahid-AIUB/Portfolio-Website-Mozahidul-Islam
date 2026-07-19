@@ -21,85 +21,92 @@ export function Nav() {
   const [open, setOpen] = useState(false);
 
   return (
-    <header className="sticky top-0 z-50 border-b border-line bg-bg/75 backdrop-blur-xl">
-      <nav className="mx-auto flex h-16 max-w-6xl items-center justify-between px-5 sm:px-8">
-        <Link
-          href="/"
-          className="group flex items-center gap-2.5 font-mono text-sm tracking-tight text-text transition-colors hover:text-amber"
-          onClick={() => setOpen(false)}
-        >
-          <span
-            className="status-dot status-dot--pulse inline-block h-1.5 w-1.5 shrink-0 rounded-full bg-live text-live"
-            aria-hidden="true"
-          />
-          <span>
-            <span className="text-amber">~/</span>mozahid
-          </span>
-        </Link>
+    <>
+      <header className="sticky top-0 z-50 border-b border-line bg-bg/75 backdrop-blur-xl">
+        <nav className="mx-auto flex h-16 max-w-6xl items-center justify-between px-5 sm:px-8">
+          <Link
+            href="/"
+            className="group flex items-center gap-2.5 font-mono text-sm tracking-tight text-text transition-colors hover:text-amber"
+            onClick={() => setOpen(false)}
+          >
+            <span
+              className="status-dot status-dot--pulse inline-block h-1.5 w-1.5 shrink-0 rounded-full bg-live text-live"
+              aria-hidden="true"
+            />
+            <span>
+              <span className="text-amber">~/</span>mozahid
+            </span>
+          </Link>
 
-        <div className="hidden items-center gap-1 md:flex">
-          {links.map((link) => {
-            const active =
-              link.href === "/"
-                ? pathname === "/"
-                : pathname.startsWith(link.href);
-            return (
-              <Link
-                key={link.href}
-                href={link.href}
-                data-active={active}
-                className={`nav-link rounded-md px-3 py-1.5 text-sm transition-colors ${
-                  active
-                    ? "bg-amber-dim text-amber"
-                    : "text-muted hover:text-text"
-                }`}
+          <div className="hidden items-center gap-1 md:flex">
+            {links.map((link) => {
+              const active =
+                link.href === "/"
+                  ? pathname === "/"
+                  : pathname.startsWith(link.href);
+              return (
+                <Link
+                  key={link.href}
+                  href={link.href}
+                  data-active={active}
+                  className={`nav-link rounded-md px-3 py-1.5 text-sm transition-colors ${
+                    active
+                      ? "bg-amber-dim text-amber"
+                      : "text-muted hover:text-text"
+                  }`}
+                >
+                  {link.label}
+                </Link>
+              );
+            })}
+            <div className="ml-3 flex items-center gap-3">
+              <button
+                type="button"
+                onClick={() => window.dispatchEvent(new Event("open-cmdk"))}
+                aria-label="Open command menu"
+                className="hidden items-center gap-1.5 rounded-md border border-line px-2.5 py-1.5 font-mono text-[11px] text-muted transition-colors hover:border-amber/50 hover:text-text lg:flex"
               >
-                {link.label}
-              </Link>
-            );
-          })}
-          <div className="ml-3 flex items-center gap-3">
+                <kbd>Ctrl</kbd>
+                <kbd>K</kbd>
+              </button>
+              <ThemeToggle />
+              <Magnetic>
+                <Link
+                  href="/contact"
+                  className="beam-border block rounded-full border border-amber/30 bg-amber-dim px-4 py-1.5 text-sm font-semibold text-amber transition-colors hover:bg-amber hover:text-bg"
+                >
+                  Let's talk
+                </Link>
+              </Magnetic>
+            </div>
+          </div>
+
+          <div className="relative z-50 flex items-center gap-2 md:hidden">
+            <ThemeToggle />
             <button
               type="button"
-              onClick={() => window.dispatchEvent(new Event("open-cmdk"))}
-              aria-label="Open command menu"
-              className="hidden items-center gap-1.5 rounded-md border border-line px-2.5 py-1.5 font-mono text-[11px] text-muted transition-colors hover:border-amber/50 hover:text-text lg:flex"
+              aria-label={open ? "Close menu" : "Open menu"}
+              aria-expanded={open}
+              className="relative z-50 flex h-10 w-10 items-center justify-center rounded-md text-muted hover:text-text"
+              onClick={() => setOpen((v) => !v)}
             >
-              <kbd>Ctrl</kbd>
-              <kbd>K</kbd>
+              <svg width="20" height="20" viewBox="0 0 20 20" fill="none" aria-hidden="true">
+                {open ? (
+                  <path d="M5 5l10 10M15 5L5 15" stroke="currentColor" strokeWidth="1.6" strokeLinecap="round" />
+                ) : (
+                  <path d="M3 6h14M3 10h14M3 14h14" stroke="currentColor" strokeWidth="1.6" strokeLinecap="round" />
+                )}
+              </svg>
             </button>
-            <ThemeToggle />
-            <Magnetic>
-              <Link
-                href="/contact"
-                className="beam-border block rounded-full border border-amber/30 bg-amber-dim px-4 py-1.5 text-sm font-semibold text-amber transition-colors hover:bg-amber hover:text-bg"
-              >
-                Let's talk
-              </Link>
-            </Magnetic>
           </div>
-        </div>
+        </nav>
 
-        <div className="relative z-50 flex items-center gap-2 md:hidden">
-          <ThemeToggle />
-          <button
-            type="button"
-            aria-label={open ? "Close menu" : "Open menu"}
-            aria-expanded={open}
-            className="relative z-50 flex h-10 w-10 items-center justify-center rounded-md text-muted hover:text-text"
-            onClick={() => setOpen((v) => !v)}
-          >
-            <svg width="20" height="20" viewBox="0 0 20 20" fill="none" aria-hidden="true">
-              {open ? (
-                <path d="M5 5l10 10M15 5L5 15" stroke="currentColor" strokeWidth="1.6" strokeLinecap="round" />
-              ) : (
-                <path d="M3 6h14M3 10h14M3 14h14" stroke="currentColor" strokeWidth="1.6" strokeLinecap="round" />
-              )}
-            </svg>
-          </button>
-        </div>
-      </nav>
+        <ScrollProgress />
+      </header>
 
+      {/* Rendered outside the <header> on purpose: its backdrop-blur creates a
+          CSS containing block that traps fixed-position descendants, collapsing
+          this panel to zero height. */}
       {open && (
         <div className="fixed inset-x-0 top-16 bottom-0 z-40 overflow-y-auto border-t border-line bg-bg md:hidden">
           <div className="mx-auto flex max-w-6xl flex-col px-5 py-6">
@@ -141,8 +148,6 @@ export function Nav() {
           </div>
         </div>
       )}
-
-      <ScrollProgress />
-    </header>
+    </>
   );
 }

@@ -49,7 +49,7 @@ export function Nav() {
                   key={link.href}
                   href={link.href}
                   data-active={active}
-                  className={`nav-link rounded-md px-3 py-1.5 text-sm transition-colors ${
+                  className={`nav-link rounded-md px-3 py-1.5 font-mono text-[11px] font-medium uppercase tracking-[0.16em] transition-colors ${
                     active
                       ? "bg-amber-dim text-amber"
                       : "text-muted hover:text-text"
@@ -120,11 +120,11 @@ export function Nav() {
                   key={link.href}
                   href={link.href}
                   onClick={() => setOpen(false)}
-                  className={`flex items-center gap-4 border-b border-line py-4 font-display text-2xl font-bold transition-colors ${
+                  className={`display-sharp flex items-center gap-4 border-b border-line py-4 font-display text-[2rem] font-extrabold transition-colors ${
                     active ? "text-amber" : "text-text hover:text-amber"
                   }`}
                 >
-                  <span className="font-mono text-xs font-normal text-muted">
+                  <span className="font-mono text-xs font-normal tracking-[0.1em] text-amber/70">
                     {String(i + 1).padStart(2, "0")}
                   </span>
                   {link.label}

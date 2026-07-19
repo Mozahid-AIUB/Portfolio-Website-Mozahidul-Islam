@@ -13,7 +13,7 @@ export function SectionHeading({ eyebrow, title, lede }: SectionHeadingProps) {
         </span>
         <span className="h-px flex-1 bg-line" aria-hidden="true" />
       </div>
-      <h2 className="font-display text-3xl font-bold tracking-tight text-text sm:text-4xl">
+      <h2 className="display-sharp font-display text-3xl font-bold text-text sm:text-[2.5rem]">
         {title}
       </h2>
       {lede && <p className="mt-4 max-w-2xl text-muted">{lede}</p>}

@@ -43,7 +43,7 @@ export function Footer() {
               href="/contact"
               className="group flex flex-col gap-4 border-b border-line pb-12 sm:flex-row sm:items-end sm:justify-between"
             >
-              <h2 className="max-w-md font-display text-3xl font-extrabold leading-tight tracking-tight text-text transition-colors group-hover:text-amber sm:text-4xl">
+              <h2 className="display-sharp max-w-md font-display text-3xl font-extrabold leading-tight text-text transition-colors group-hover:text-amber sm:text-4xl">
                 Let&rsquo;s build something.
               </h2>
               <span className="inline-flex shrink-0 items-center gap-2 rounded-full border border-amber/30 bg-amber-dim px-5 py-2.5 font-mono text-sm font-semibold text-amber transition-colors group-hover:bg-amber group-hover:text-bg">

@@ -69,7 +69,7 @@ export function HomeSidebar() {
             <p className="font-mono text-xs tracking-[0.2em] text-amber">
               ~/mozahid · {profile.location.toUpperCase()}
             </p>
-            <h1 className="mt-3 font-display text-4xl font-extrabold leading-[1.02] tracking-tight sm:text-5xl">
+            <h1 className="display-sharp mt-3 font-display text-[clamp(2.3rem,4.5vw+1.2rem,3.4rem)] font-extrabold leading-[1.02]">
           {["Mozahidul", "Islam"].map((word, i) => (
             <span key={word} className="block overflow-hidden pb-0.5">
               <motion.span

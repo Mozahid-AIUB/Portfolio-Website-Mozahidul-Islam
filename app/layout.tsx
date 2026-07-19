@@ -15,9 +15,12 @@ import { Preloader } from "@/components/Preloader";
 import { CommandPalette } from "@/components/CommandPalette";
 import { profile } from "@/data/profile";
 
+// opsz unlocks the high-contrast display cut at heading sizes;
+// wdth lets hero type set slightly condensed for a poster feel
 const bricolage = Bricolage_Grotesque({
   variable: "--font-bricolage",
   subsets: ["latin"],
+  axes: ["opsz", "wdth"],
 });
 
 const manrope = Manrope({

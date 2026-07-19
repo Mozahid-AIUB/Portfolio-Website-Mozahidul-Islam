@@ -373,6 +373,14 @@ h3 {
   animation: caret-blink 1.1s step-end infinite;
 }
 
+/* ── Display craft — pin Bricolage's poster cut on big headlines ──
+   opsz 96 = the high-contrast display master; wdth 94 sets a hair
+   condensed so large lines feel engineered, not inflated */
+.display-sharp {
+  font-variation-settings: "opsz" 96, "wdth" 94;
+  letter-spacing: -0.028em;
+}
+
 /* ── Nav link underline ────────────────────────────────────────── */
 .nav-link {
   position: relative;

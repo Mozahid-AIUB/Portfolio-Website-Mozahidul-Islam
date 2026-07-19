@@ -9,7 +9,7 @@ interface OrbitItem {
 
 const ORBIT_ITEMS: OrbitItem[] = [
   { label: "Full-Stack" },
-  { label: "Mobile App" },
+  { label: "Android + iOS" },
   { label: "Databases" },
   { label: "Shipped Products" },
   { label: "Security" },
@@ -265,7 +265,7 @@ export function OrbitVisual() {
           top: CENTER,
           width: SPHERE_RADIUS * 2 + 32,
           height: SPHERE_RADIUS * 2 + 32,
-          background: "radial-gradient(circle, rgba(245,184,65,0.35), transparent 70%)",
+          background: "radial-gradient(circle, rgba(245,184,65,0.22), transparent 70%)",
           filter: "blur(20px)",
         }}
       />
@@ -279,7 +279,7 @@ export function OrbitVisual() {
           background:
             "radial-gradient(circle at 35% 30%, #ffffff55 0%, #fde5ab 15%, var(--amber) 50%, #92600f 100%)",
           boxShadow:
-            "0 0 60px 20px rgba(245,184,65,0.4), 0 0 120px 40px rgba(245,184,65,0.2), inset -10px -10px 30px rgba(0,0,0,0.3)",
+            "0 0 45px 12px rgba(245,184,65,0.26), 0 0 90px 28px rgba(245,184,65,0.12), inset -10px -10px 30px rgba(0,0,0,0.3)",
         }}
       >
         <div className="absolute inset-1 rounded-full bg-gradient-to-br from-white/25 to-transparent" />

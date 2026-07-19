@@ -120,7 +120,7 @@ export function Nav() {
                   key={link.href}
                   href={link.href}
                   onClick={() => setOpen(false)}
-                  className={`display-sharp flex items-center gap-4 border-b border-line py-4 font-display text-[2rem] font-extrabold transition-colors ${
+                  className={`flex items-center gap-3 border-b border-line py-3.5 font-display text-lg font-semibold tracking-tight transition-colors ${
                     active ? "text-amber" : "text-text hover:text-amber"
                   }`}
                 >

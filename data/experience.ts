@@ -22,7 +22,7 @@ export const experience: Experience[] = [
     role: "Junior Teacher — Mathematics & ICT",
     org: "Creative Academy",
     location: "Dhaka, Bangladesh",
-    period: "Oct 2024 – Present",
+    period: "Oct 2024 – Dec 2025",
     points: [
       "Teach mathematics and ICT to students from grades 1–10 with structured lesson plans.",
       "Mentor students in programming basics and problem-solving techniques.",

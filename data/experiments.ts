@@ -7,13 +7,6 @@ export interface Experiment {
 
 export const experiments: Experiment[] = [
   {
-    name: "RAG-APP-AI",
-    description:
-      "Retrieval-augmented generation app — exploring how to ground LLM answers in a custom document corpus.",
-    tech: ["Python", "LLM APIs"],
-    href: "https://github.com/Mozahid-AIUB/RAG-APP-AI",
-  },
-  {
     name: "Exploring NestJS",
     description:
       "Working through NestJS's module system, dependency injection and decorators to level up my Node.js architecture.",

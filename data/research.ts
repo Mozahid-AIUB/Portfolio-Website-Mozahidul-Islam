@@ -6,11 +6,24 @@ export interface ResearchItem {
   status: "ongoing" | "in-production" | "published-code";
   statusLabel: string;
   href: string;
+  /** DOI landing page, once minted on Zenodo — shown as a small badge link */
+  doi?: string;
 }
 
 export const research: ResearchItem[] = [
   {
     code: "R-01",
+    title: "Predictive Maintenance with LSTM on the Edge",
+    area: "Machine Learning · IoT",
+    description:
+      "First-author study: LSTM vs GRU on IoT sensor streams for failure prediction — noise-robust training, dropout regularization and TensorFlow Lite quantization for sub-50 ms inference on edge hardware.",
+    status: "ongoing",
+    statusLabel: "Working paper",
+    href: "/research/predictive-maintenance-lstm.pdf",
+    doi: "https://doi.org/10.5281/zenodo.21430831",
+  },
+  {
+    code: "R-02",
     title: "Retrieval-Augmented Generation",
     area: "Applied AI",
     description:
@@ -20,17 +33,17 @@ export const research: ResearchItem[] = [
     href: "https://github.com/Mozahid-AIUB/RAG-APP-AI",
   },
   {
-    code: "R-02",
+    code: "R-03",
     title: "LLM Tool Protocols (MCP)",
     area: "AI Systems",
     description:
       "Model Context Protocol servers in a production SaaS: how LLMs safely call business tools — studied and shipped inside FBReach with Claude & OpenAI APIs.",
     status: "in-production",
     statusLabel: "Running in production",
-    href: "https://fbreach.onrender.com",
+    href: "https://postreach.me",
   },
   {
-    code: "R-03",
+    code: "R-04",
     title: "Learning Engagement Mechanics",
     area: "EdTech",
     description:
@@ -40,7 +53,7 @@ export const research: ResearchItem[] = [
     href: "https://play.google.com/store/apps/details?id=com.studyforce.app",
   },
   {
-    code: "R-04",
+    code: "R-05",
     title: "Programmatic Visualization",
     area: "Graphics",
     description:
@@ -48,5 +61,36 @@ export const research: ResearchItem[] = [
     status: "published-code",
     statusLabel: "Open source",
     href: "https://github.com/Mozahid-AIUB/intership-manim-cinematic-showcase-series-2025",
+  },
+];
+
+/** course-based survey studies — the research-methods groundwork;
+    all unpublished manuscripts, presented honestly as working papers */
+export interface WorkingPaper {
+  title: string;
+  note: string;
+  href: string;
+  doi?: string;
+}
+
+export const workingPapers: WorkingPaper[] = [
+  {
+    title:
+      "Strengthening Pharmacy Education in Bangladesh: The Role of Early Academic Screening",
+    note: "First author · survey of 59 pharmacy students — descriptive statistics & cross-tabulation (Excel, SPSS)",
+    href: "/research/pharmacy-education-screening.pdf",
+    doi: "https://doi.org/10.5281/zenodo.21433003",
+  },
+  {
+    title: "Examining the Impact of Technology Integration on Student Engagement",
+    note: "Survey of 50 students & 6 teachers — the classroom-scale groundwork behind the live StudyForce experiments (R-04)",
+    href: "/research/technology-integration-engagement.pdf",
+    doi: "https://doi.org/10.5281/zenodo.21433201",
+  },
+  {
+    title: "The Psychological Impact of Cyberbullying on University Students",
+    note: "Survey of 57 students · 22-item questionnaire on mental-health and academic impact",
+    href: "/research/cyberbullying-university-students.pdf",
+    doi: "https://doi.org/10.5281/zenodo.21433121",
   },
 ];

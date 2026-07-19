@@ -24,8 +24,6 @@ export function CommandPalette() {
       { label: "Skills", hint: "Section", run: () => (window.location.href = "/#skills") },
       { label: "Experience", hint: "Section", run: () => (window.location.href = "/#experience") },
       { label: "Featured projects", hint: "Section", run: () => (window.location.href = "/#projects") },
-      { label: "Research", hint: "Section", run: () => (window.location.href = "/#research") },
-      { label: "Education", hint: "Section", run: () => (window.location.href = "/#education") },
       { label: "All projects", hint: "Page", run: () => router.push("/projects") },
       { label: "Education & certifications", hint: "Page", run: () => router.push("/education") },
       { label: "Research & publications", hint: "Page", run: () => router.push("/experiments") },

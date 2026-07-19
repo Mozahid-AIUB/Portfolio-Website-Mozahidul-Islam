@@ -6,7 +6,7 @@ import {
   projectCategories,
   type ProjectCategory,
 } from "@/data/projects";
-import { ProjectCard } from "./ProjectCard";
+import { ProjectPoster } from "./ProjectPoster";
 
 type Filter = "All" | ProjectCategory;
 
@@ -49,9 +49,9 @@ export function ProjectsExplorer() {
         ))}
       </div>
 
-      <div className="grid gap-5 sm:grid-cols-2">
-        {visible.map((project) => (
-          <ProjectCard key={project.slug} project={project} />
+      <div className="space-y-10">
+        {visible.map((project, i) => (
+          <ProjectPoster key={project.slug} project={project} flip={i % 2 === 1} />
         ))}
       </div>
     </div>

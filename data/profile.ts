@@ -15,6 +15,18 @@ export const profile = {
   github: "https://github.com/Mozahid-AIUB",
   linkedin: "https://www.linkedin.com/in/md-mozahidul-islam-831276396/",
   codeforces: "https://codeforces.com/profile/mozahid1212121",
+  orcid: "https://orcid.org/0009-0004-8941-7132",
+  facebookPages: [
+    {
+      label: "StudyForce",
+      href: "https://www.facebook.com/StudyForceBD/",
+    },
+    {
+      label: "Practical Khata BD",
+      href: "https://www.facebook.com/SSCHSCPracticalKhataBD/",
+    },
+    { label: "ICT Decoded", href: "https://www.facebook.com/ICTDecoded/" },
+  ],
   cvPath: "/CV_Mozahidul_Islam.pdf",
   about: [
     "I'm a software engineer who ships. My products run in production with real users: StudyForce lives on the Google Play Store, FBReach automates Facebook marketing for real businesses, and Practical Khata BD takes orders and delivers physical products across Bangladesh through a platform I built end to end.",

@@ -1,13 +1,13 @@
 import type { Metadata } from "next";
-import Link from "next/link";
 import { SectionHeading } from "@/components/SectionHeading";
 import { Reveal } from "@/components/Reveal";
-import { research } from "@/data/research";
+import { research, workingPapers } from "@/data/research";
+import { profile } from "@/data/profile";
 
 export const metadata: Metadata = {
   title: "Research",
   description:
-    "Research directions and upcoming publications — RAG systems, LLM tool protocols, EdTech engagement mechanics.",
+    "Research directions, working papers and preprints — RAG systems, LLM tool protocols, EdTech engagement mechanics, and predictive maintenance with LSTM.",
 };
 
 export default function ResearchPage() {
@@ -15,68 +15,114 @@ export default function ResearchPage() {
     <div className="mx-auto max-w-6xl px-5 py-20 sm:px-8">
       <SectionHeading
         eyebrow="research"
-        title="Formal research & publications"
-        lede="This page is reserved for published work. Papers and formal write-ups are in progress — the directions below are where they'll come from."
+        title="Research & working papers"
+        lede="Engineering answers &ldquo;how&rdquo;; research asks &ldquo;what actually works?&rdquo; Everything below is verifiable: DOIs on Zenodo, live products as testbeds, or open-source code."
       />
 
       <Reveal>
-        <div className="rounded-2xl border border-dashed border-amber/40 bg-surface/60 p-10 text-center sm:p-14">
-          <p className="inline-flex items-center gap-2.5 rounded-full border border-line bg-bg px-4 py-1.5 font-mono text-xs uppercase tracking-[0.2em] text-amber">
-            <span
-              className="status-dot status-dot--pulse inline-block h-1.5 w-1.5 rounded-full bg-amber text-amber"
-              aria-hidden="true"
-            />
-            Upcoming
-          </p>
-          <h2 className="mx-auto mt-5 max-w-lg font-display text-2xl font-bold tracking-tight text-text sm:text-3xl">
-            Publications are on the way.
-          </h2>
-          <p className="mx-auto mt-4 max-w-md text-sm leading-relaxed text-muted">
-            I research the way I engineer — with live products as testbeds.
-            Formal write-ups of that work will land here.
-          </p>
-        </div>
+        <a
+          href={profile.orcid}
+          target="_blank"
+          rel="noopener noreferrer"
+          className="mb-16 inline-flex items-center gap-2 font-mono text-xs text-muted transition-colors hover:text-amber"
+        >
+          ORCID: 0009-0004-8941-7132
+          <span aria-hidden="true">↗</span>
+        </a>
       </Reveal>
 
-      <div className="mt-16">
+      <div>
         <p className="mb-6 font-mono text-xs uppercase tracking-[0.25em] text-amber">
           Active research directions
         </p>
         <ol className="divide-y divide-line border-y border-line">
           {research.map((item) => (
             <li key={item.code}>
-              <a
-                href={item.href}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="group grid gap-2 py-6 transition-colors sm:grid-cols-[110px_1fr_auto] sm:items-baseline sm:gap-6"
-              >
+              <div className="group grid gap-2 py-6 sm:grid-cols-[140px_1fr_auto] sm:items-baseline sm:gap-6">
                 <span className="font-mono text-xs text-amber">
                   {item.code} · {item.area}
                 </span>
                 <span>
-                  <span className="font-display text-base font-bold text-text transition-colors group-hover:text-amber">
+                  <a
+                    href={item.href}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="font-display text-base font-bold text-text transition-colors hover:text-amber"
+                  >
                     {item.title}
-                  </span>
+                  </a>
                   <span className="mt-1 block text-sm leading-relaxed text-muted">
                     {item.description}
                   </span>
+                  {item.doi && (
+                    <a
+                      href={item.doi}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="mt-2 inline-block font-mono text-[11px] text-amber underline-offset-2 hover:underline"
+                    >
+                      DOI ↗
+                    </a>
+                  )}
                 </span>
-                <span className="font-mono text-[11px] uppercase tracking-widest text-muted">
-                  {item.statusLabel} ↗
+                <span className="whitespace-nowrap font-mono text-[11px] uppercase tracking-widest text-muted">
+                  {item.statusLabel}
                 </span>
-              </a>
+              </div>
+            </li>
+          ))}
+        </ol>
+      </div>
+
+      <div className="mt-20">
+        <p className="mb-2 font-mono text-xs uppercase tracking-[0.25em] text-amber">
+          Working papers — course-based survey studies
+        </p>
+        <p className="mb-6 max-w-2xl text-sm leading-relaxed text-muted">
+          Unpublished manuscripts from undergraduate coursework — the
+          research-methods groundwork behind the directions above. Presented
+          honestly as working papers, each with a DOI on Zenodo.
+        </p>
+        <ol className="divide-y divide-line border-y border-line">
+          {workingPapers.map((paper) => (
+            <li key={paper.title} className="py-6">
+              <span className="font-display text-base font-bold text-text">
+                {paper.title}
+              </span>
+              <span className="mt-1 block text-sm leading-relaxed text-muted">
+                {paper.note}
+              </span>
+              <div className="mt-3 flex flex-wrap items-center gap-4 font-mono text-[11px] uppercase tracking-widest">
+                <a
+                  href={paper.href}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="text-muted transition-colors hover:text-amber"
+                >
+                  Read PDF ↗
+                </a>
+                {paper.doi && (
+                  <a
+                    href={paper.doi}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="normal-case text-amber underline-offset-2 hover:underline"
+                  >
+                    DOI ↗
+                  </a>
+                )}
+              </div>
             </li>
           ))}
         </ol>
       </div>
 
       <Reveal>
-        <p className="mt-14 text-center text-sm text-muted">
+        <p className="mt-16 text-center text-sm text-muted">
           Looking for the smaller builds that used to live here?{" "}
-          <Link href="/projects" className="text-amber hover:opacity-80">
+          <a href="/projects" className="text-amber hover:opacity-80">
             They&apos;re on the projects page now →
-          </Link>
+          </a>
         </p>
       </Reveal>
     </div>

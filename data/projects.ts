@@ -4,6 +4,7 @@ export type ProjectCategory =
   | "Mobile"
   | "SaaS"
   | "Web"
+  | "AI"
   | "Desktop"
   | "Hardware"
   | "Database";
@@ -30,12 +31,21 @@ export interface Project {
   /** duotone gradient used for the project's cover artwork */
   cover: string;
   monogram: string;
+  /** square app/brand icon shown as a chip next to the project name;
+      falls back to a monogram chip tinted with the cover gradient */
+  logo?: string;
   kind: "web" | "mobile";
   /** short URL shown in the mockup chrome */
   displayUrl?: string;
   /** real screenshot paths under /public — replace the skeleton art when set;
-      multiple images crossfade in the device mockup */
+      multiple images slide one by one in the device mockup */
   screenshots?: string[];
+  /** intrinsic pixel size of the first web screenshot — the browser mockup
+      keeps this aspect ratio instead of cropping to a fixed height */
+  screenshotSize?: { width: number; height: number };
+  /** poster panel behind the featured showcase, colored from the project's
+      own screenshots; `dark` panels keep the site's dark text tokens */
+  panel?: { bg: string; accent: string; accentText: string; dark?: boolean };
 }
 
 export const projects: Project[] = [
@@ -61,19 +71,24 @@ export const projects: Project[] = [
     tech: ["React Native", "TypeScript", "Firebase", "Expo"],
     links: [
       {
-        label: "Play Store",
+        label: "View on Play Store",
         href: "https://play.google.com/store/apps/details?id=com.studyforce.app",
       },
     ],
-    cover: "linear-gradient(135deg, #1d4ed8 0%, #06b6d4 100%)",
+    cover: "linear-gradient(135deg, #23543a 0%, #7fae6b 100%)",
     monogram: "SF",
+    logo: "/projects/studyforce-picture/icon.png",
+    panel: { bg: "#eef0e0", accent: "#2f6b4a", accentText: "#ffffff" },
     kind: "mobile",
     displayUrl: "play.google.com/studyforce",
     screenshots: [
-      "/projects/studyforce.png",
-      "/projects/studyforce-2.png",
-      "/projects/studyforce-3.png",
-      "/projects/studyforce-4.png",
+      "/projects/studyforce-picture/home.png",
+      "/projects/studyforce-picture/subjects.png",
+      "/projects/studyforce-picture/focus.png",
+      "/projects/studyforce-picture/ai-chat.png",
+      "/projects/studyforce-picture/routine.png",
+      "/projects/studyforce-picture/discipline.png",
+      "/projects/studyforce-picture/rooms.png",
     ],
   },
   {
@@ -96,12 +111,20 @@ export const projects: Project[] = [
     impact:
       'Deployed and serving real businesses — the landing promise is literal: "Run your business while you sleep."',
     tech: ["Node.js", "Claude API", "OpenAI API", "OAuth", "PostgreSQL", "MCP"],
-    links: [{ label: "Live site", href: "https://fbreach.onrender.com" }],
-    cover: "linear-gradient(135deg, #7c3aed 0%, #db2777 100%)",
+    links: [{ label: "Visit live site", href: "https://postreach.me" }],
+    cover: "linear-gradient(135deg, #065f46 0%, #34d399 100%)",
     monogram: "FB",
+    panel: { bg: "#e6f2ea", accent: "#1f7a4d", accentText: "#ffffff" },
     kind: "web",
-    displayUrl: "fbreach.onrender.com",
-    screenshots: ["/projects/fbreach.png"],
+    displayUrl: "postreach.me",
+    screenshots: [
+      "/projects/Fb-reach-picture/hero.png",
+      "/projects/Fb-reach-picture/dashboard.png",
+      "/projects/Fb-reach-picture/publish.png",
+      "/projects/Fb-reach-picture/features.png",
+      "/projects/Fb-reach-picture/teams.png",
+    ],
+    screenshotSize: { width: 1025, height: 602 },
   },
   {
     slug: "gosharex",
@@ -124,12 +147,13 @@ export const projects: Project[] = [
     tech: ["React Native", "TypeScript", "Expo", "Supabase", "PostgreSQL"],
     links: [
       {
-        label: "GitHub (private)",
+        label: "View my GitHub",
         href: "https://github.com/Mozahid-AIUB",
       },
     ],
-    cover: "linear-gradient(135deg, #0d9488 0%, #84cc16 100%)",
+    cover: "linear-gradient(135deg, #4f46e5 0%, #a5b4fc 100%)",
     monogram: "GX",
+    panel: { bg: "#ededfa", accent: "#5b5bd6", accentText: "#ffffff" },
     kind: "mobile",
     displayUrl: "GoShareX — ride sharing",
     screenshots: ["/projects/gosharex.png"],
@@ -153,12 +177,79 @@ export const projects: Project[] = [
     impact:
       "A live business, not a demo — orders come in through the site and physical products ship across the country in 2–3 days.",
     tech: ["Django", "Python", "JavaScript", "MySQL"],
-    links: [{ label: "Live site", href: "https://practicalkhata.pro.bd" }],
-    cover: "linear-gradient(135deg, #b45309 0%, #f59e0b 100%)",
+    links: [
+      { label: "Visit live site", href: "https://shop.practicalkhata.pro.bd/en" },
+    ],
+    cover: "linear-gradient(135deg, #123a75 0%, #4f83d1 100%)",
     monogram: "PK",
+    panel: { bg: "#f1f5fb", accent: "#1e56a0", accentText: "#ffffff" },
     kind: "web",
-    displayUrl: "practicalkhata.pro.bd",
-    screenshots: ["/projects/practicalkhata.png"],
+    displayUrl: "shop.practicalkhata.pro.bd",
+    screenshots: [
+      "/projects/practicalkhata.png",
+      "/projects/practicall-shop/shop-list.png",
+      "/projects/practicall-shop/trust.png",
+    ],
+    screenshotSize: { width: 1025, height: 602 },
+  },
+  {
+    slug: "rag-data-assistant",
+    name: "RAG Data Assistant",
+    tagline: "Chat with your spreadsheets — answers grounded in your data",
+    period: "2026",
+    status: "source",
+    statusLabel: "Open source",
+    category: "AI",
+    problem:
+      "Business data lives in Excel files, but getting answers means manual digging — and generic AI chatbots hallucinate instead of reading your actual rows.",
+    built: [
+      "FastAPI + LangChain backend: uploaded Excel/CSV is chunked, embedded locally with Sentence-Transformers and indexed in FAISS for vector search.",
+      "Answers generated by an LLM via OpenRouter, grounded in the retrieved rows — sources, not guesses.",
+      "React + Vite chat interface with file upload and active-dataset tracking.",
+    ],
+    tech: ["Python", "FastAPI", "LangChain", "FAISS", "React", "Vite"],
+    links: [
+      {
+        label: "View source",
+        href: "https://github.com/Mozahid-AIUB/RAG-APP-AI",
+      },
+    ],
+    cover: "linear-gradient(135deg, #134e4a 0%, #38bdf8 100%)",
+    monogram: "RG",
+    kind: "web",
+    displayUrl: "RAG-APP-AI",
+    screenshots: ["/projects/rag-app/home.png", "/projects/rag-app/chat.png"],
+    screenshotSize: { width: 1342, height: 610 },
+  },
+  {
+    slug: "charulata-green-bd",
+    name: "Charulata Green BD",
+    tagline: "Bilingual plant-nursery e-commerce platform",
+    period: "2026",
+    status: "live",
+    statusLabel: "Live demo",
+    category: "Web",
+    built: [
+      "Full e-commerce experience for a plant nursery: categorized catalog (fruit trees, flower plants, gardening tools), cart, wishlist and top-sellers carousel.",
+      "Bilingual UI — Bangla and English — with appointment booking for garden consultations.",
+    ],
+    tech: ["TypeScript", "React", "Tailwind CSS"],
+    links: [
+      {
+        label: "Visit live site",
+        href: "https://charulata-green-bd.vercel.app/en",
+      },
+      {
+        label: "View source",
+        href: "https://github.com/Mozahid-AIUB/charulata-green-bd",
+      },
+    ],
+    cover: "linear-gradient(135deg, #14532d 0%, #4ade80 100%)",
+    monogram: "CH",
+    kind: "web",
+    displayUrl: "charulata-green-bd.vercel.app",
+    screenshots: ["/projects/charulata.png"],
+    screenshotSize: { width: 1025, height: 602 },
   },
   {
     slug: "mehendihub",
@@ -174,38 +265,18 @@ export const projects: Project[] = [
     ],
     tech: ["HTML", "CSS", "JavaScript"],
     links: [
-      { label: "Live site", href: "https://mehendihub.netlify.app" },
-      { label: "GitHub", href: "https://github.com/Mozahid-AIUB/mehenidihub" },
+      { label: "Visit live site", href: "https://mehendihub.netlify.app" },
+      { label: "View source", href: "https://github.com/Mozahid-AIUB/mehenidihub" },
     ],
     cover: "linear-gradient(135deg, #be123c 0%, #f97316 100%)",
     monogram: "MH",
     kind: "web",
     displayUrl: "mehendihub.netlify.app",
-  },
-  {
-    slug: "charulata-green-bd",
-    name: "Charulata Green BD",
-    tagline: "Bilingual plant-nursery e-commerce platform",
-    period: "2026",
-    status: "source",
-    statusLabel: "Demo build",
-    category: "Web",
-    built: [
-      "Full e-commerce experience for a plant nursery: categorized catalog (fruit trees, flower plants, gardening tools), cart, wishlist and top-sellers carousel.",
-      "Bilingual UI — Bangla and English — with appointment booking for garden consultations.",
+    screenshots: [
+      "/projects/mehendi-design/featured.png",
+      "/projects/mehendi-design/gallery.png",
     ],
-    tech: ["TypeScript", "React", "Tailwind CSS"],
-    links: [
-      {
-        label: "GitHub",
-        href: "https://github.com/Mozahid-AIUB/charulata-green-bd",
-      },
-    ],
-    cover: "linear-gradient(135deg, #14532d 0%, #4ade80 100%)",
-    monogram: "CH",
-    kind: "web",
-    displayUrl: "Charulata — plant e-commerce",
-    screenshots: ["/projects/charulata.png"],
+    screenshotSize: { width: 1319, height: 601 },
   },
   {
     slug: "day-care-management",
@@ -222,7 +293,7 @@ export const projects: Project[] = [
     tech: ["C#", ".NET", "SQL Server"],
     links: [
       {
-        label: "GitHub",
+        label: "View source",
         href: "https://github.com/Mozahid-AIUB/Day-Care-Management-System",
       },
     ],
@@ -244,7 +315,7 @@ export const projects: Project[] = [
     ],
     tech: ["Java", "Swing"],
     links: [
-      { label: "GitHub", href: "https://github.com/Mozahid-AIUB/HMS_JAVA" },
+      { label: "View source", href: "https://github.com/Mozahid-AIUB/HMS_JAVA" },
     ],
     cover: "linear-gradient(135deg, #334155 0%, #64748b 100%)",
     monogram: "PM",
@@ -265,7 +336,7 @@ export const projects: Project[] = [
     tech: ["Arduino", "Embedded C", "Electronics"],
     links: [
       {
-        label: "GitHub",
+        label: "View source",
         href: "https://github.com/Mozahid-AIUB/line-follower-obstacle-avoider-robot",
       },
     ],
@@ -286,7 +357,7 @@ export const projects: Project[] = [
       "ER diagrams, normalization and table design for accurate, consistent data.",
     ],
     tech: ["Oracle", "PL/SQL"],
-    links: [{ label: "GitHub", href: "https://github.com/Mozahid-AIUB" }],
+    links: [{ label: "View source", href: "https://github.com/Mozahid-AIUB" }],
     cover: "linear-gradient(135deg, #7f1d1d 0%, #ef4444 100%)",
     monogram: "OT",
     kind: "web",
@@ -299,6 +370,7 @@ export const projectCategories: ProjectCategory[] = [
   "Mobile",
   "SaaS",
   "Web",
+  "AI",
   "Desktop",
   "Hardware",
   "Database",

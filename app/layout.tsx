@@ -1,5 +1,10 @@
 import type { Metadata } from "next";
-import { Bricolage_Grotesque, Manrope, JetBrains_Mono } from "next/font/google";
+import {
+  Bricolage_Grotesque,
+  Manrope,
+  JetBrains_Mono,
+  Instrument_Serif,
+} from "next/font/google";
 import "./globals.css";
 import { Nav } from "@/components/Nav";
 import { Footer } from "@/components/Footer";
@@ -23,6 +28,14 @@ const manrope = Manrope({
 const jetbrains = JetBrains_Mono({
   variable: "--font-jetbrains",
   subsets: ["latin"],
+});
+
+// single job: the italic pull-quote voice for project impact lines
+const instrument = Instrument_Serif({
+  variable: "--font-instrument",
+  subsets: ["latin"],
+  weight: "400",
+  style: "italic",
 });
 
 const siteUrl = "https://mozahidulislam.pro.bd";
@@ -115,7 +128,7 @@ export default function RootLayout({
     <html
       lang="en"
       suppressHydrationWarning
-      className={`${bricolage.variable} ${manrope.variable} ${jetbrains.variable} h-full antialiased`}
+      className={`${bricolage.variable} ${manrope.variable} ${jetbrains.variable} ${instrument.variable} h-full antialiased`}
     >
       <head>
         <script

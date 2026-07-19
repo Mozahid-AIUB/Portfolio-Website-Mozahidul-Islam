@@ -39,6 +39,7 @@
   --font-display: var(--font-bricolage), sans-serif;
   --font-sans: var(--font-manrope), sans-serif;
   --font-mono: var(--font-jetbrains), monospace;
+  --font-serif: var(--font-instrument), Georgia, serif;
 }
 
 html {

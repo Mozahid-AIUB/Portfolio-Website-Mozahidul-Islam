@@ -6,12 +6,9 @@ import { Reveal } from "@/components/Reveal";
 import { StatusBadge } from "@/components/StatusBadge";
 import { ShowcaseProject } from "@/components/ShowcaseProject";
 import { CountUp } from "@/components/CountUp";
-import { Magnetic } from "@/components/Magnetic";
 import { profile } from "@/data/profile";
 import { featuredProjects } from "@/data/projects";
-import { research } from "@/data/research";
 import { experience } from "@/data/experience";
-import { education } from "@/data/education";
 import { skillGroups } from "@/data/skills";
 
 const bentoSpans = [
@@ -165,120 +162,13 @@ export default function Home() {
               </Reveal>
             </section>
 
-            {/* Research */}
-            <section id="research" className="mt-24 scroll-mt-24">
-              <SectionLabel>Research</SectionLabel>
-              <Reveal>
-                <p className="mb-8 max-w-lg text-sm leading-relaxed text-muted">
-                  Engineering answers &ldquo;how&rdquo;; research asks
-                  &ldquo;what actually works?&rdquo; These are the questions I
-                  study — several with live products as the testbed.
-                </p>
-              </Reveal>
-              <div className="grid gap-5 sm:grid-cols-2">
-                {research.map((item, i) => (
-                  <Reveal key={item.code} delay={(i % 2) * 0.07}>
-                    <a
-                      href={item.href}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      className="group flex h-full flex-col rounded-xl border border-line bg-surface/70 p-6 transition-all duration-300 hover:-translate-y-1 hover:border-amber/40"
-                    >
-                      <div className="flex items-center justify-between">
-                        <span className="font-mono text-xs text-amber">
-                          {item.code} · {item.area}
-                        </span>
-                        <span
-                          className="text-muted transition-colors group-hover:text-amber"
-                          aria-hidden="true"
-                        >
-                          ↗
-                        </span>
-                      </div>
-                      <h3 className="mt-3 font-display text-lg font-bold text-text">
-                        {item.title}
-                      </h3>
-                      <p className="mt-2 flex-1 text-sm leading-relaxed text-muted">
-                        {item.description}
-                      </p>
-                      <p className="mt-4 flex items-center gap-2 font-mono text-[11px] uppercase tracking-widest text-muted">
-                        <span
-                          className={`status-dot inline-block h-1.5 w-1.5 rounded-full ${
-                            item.status === "ongoing"
-                              ? "status-dot--pulse bg-amber text-amber"
-                              : item.status === "in-production"
-                                ? "bg-live text-live"
-                                : "bg-muted text-muted"
-                          }`}
-                          aria-hidden="true"
-                        />
-                        {item.statusLabel}
-                      </p>
-                    </a>
-                  </Reveal>
-                ))}
-              </div>
-            </section>
-
-            {/* Education */}
-            <section id="education" className="mt-24 scroll-mt-24">
-              <SectionLabel>Education</SectionLabel>
-              <Reveal>
-                <ol className="group/list">
-                  {education.map((entry) => (
-                    <li key={entry.degree} className="mb-4">
-                      <div className="relative grid rounded-xl border border-transparent p-5 transition-all duration-300 sm:grid-cols-[150px_1fr] sm:gap-6 lg:group-hover/list:opacity-40 lg:hover:border-line lg:hover:bg-surface/60 lg:hover:opacity-100!">
-                        <div className="mb-1 mt-0.5 font-mono text-xs uppercase tracking-wide text-muted sm:mb-0">
-                          {entry.period}
-                        </div>
-                        <div>
-                          <h3 className="font-medium text-text">{entry.degree}</h3>
-                          <p className="mt-0.5 text-sm text-muted">
-                            {entry.institution}
-                          </p>
-                          <p className="mt-2 font-mono text-sm text-amber">
-                            {entry.result}
-                          </p>
-                        </div>
-                      </div>
-                    </li>
-                  ))}
-                </ol>
-              </Reveal>
-              <Reveal>
-                <Link
-                  href="/education"
-                  className="group ml-5 mt-2 inline-flex items-center gap-2 font-medium text-text transition-colors hover:text-amber"
-                >
-                  Certifications & full record
-                  <span className="transition-transform group-hover:translate-x-1" aria-hidden="true">
-                    →
-                  </span>
-                </Link>
-              </Reveal>
-            </section>
-
             {/* Outro */}
             <Reveal>
               <div className="mt-28 border-t border-line pt-10">
-                <h2 className="font-display text-2xl font-bold text-text">
-                  Need an engineer who ships?
-                </h2>
-                <p className="mt-3 max-w-md text-muted">
+                <p className="max-w-md text-sm text-muted">
                   Based in {profile.location} ({profile.timezone}), I overlap
                   comfortably with US and European hours — remote, hybrid, or
                   on-site with relocation.
-                </p>
-                <Magnetic className="mt-6">
-                  <Link
-                    href="/contact"
-                    className="block rounded-lg bg-amber px-6 py-3 text-[15px] font-semibold text-bg transition-opacity hover:opacity-90"
-                  >
-                    Start a conversation
-                  </Link>
-                </Magnetic>
-                <p className="mt-14 font-mono text-xs text-muted/60">
-                  Designed & built by me — Next.js, Tailwind CSS, Framer Motion.
                 </p>
               </div>
             </Reveal>

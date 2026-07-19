@@ -1,6 +1,7 @@
 "use client";
 
 import { useState } from "react";
+import { profile } from "@/data/profile";
 
 // Get a free access key at https://web3forms.com with your email,
 // then set NEXT_PUBLIC_WEB3FORMS_KEY in .env.local (and on Vercel).
@@ -39,9 +40,23 @@ export function ContactForm() {
 
   if (!ACCESS_KEY) {
     return (
-      <div className="rounded-xl border border-line bg-surface p-6 text-sm text-muted">
-        The contact form needs a Web3Forms access key. Until then, reach me
-        directly by email — the links are on the right.
+      <div className="flex h-full flex-col justify-center rounded-xl border border-line bg-surface p-8 text-center">
+        <p className="mx-auto flex h-11 w-11 items-center justify-center rounded-full bg-amber-dim text-lg">
+          ✉️
+        </p>
+        <h3 className="mt-4 font-display text-lg font-bold text-text">
+          Email is the fastest way to reach me
+        </h3>
+        <p className="mx-auto mt-2 max-w-xs text-sm leading-relaxed text-muted">
+          I read every message and reply within a day. Use the details on
+          the right, or email me directly.
+        </p>
+        <a
+          href={`mailto:${profile.email}`}
+          className="mx-auto mt-6 inline-flex items-center gap-2 rounded-lg bg-amber px-6 py-2.5 text-[15px] font-semibold text-bg transition-opacity hover:opacity-90"
+        >
+          Email me
+        </a>
       </div>
     );
   }

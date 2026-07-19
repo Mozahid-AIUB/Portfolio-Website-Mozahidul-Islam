@@ -134,6 +134,17 @@ h3 {
   animation: orbit-spin-reverse linear infinite;
 }
 
+/* Spokes + labels spin as one group at 90s/rev; each label pill runs the
+   reverse keyframes at the same duration so it cancels the parent's
+   rotation exactly, keeping the text level while it orbits */
+.orbit-group-spin {
+  animation: orbit-spin 90s linear infinite;
+}
+
+.orbit-group-spin-reverse {
+  animation: orbit-spin-reverse 90s linear infinite;
+}
+
 @media (prefers-reduced-motion: reduce) {
   .orbit-spin,
   .orbit-spin-reverse {

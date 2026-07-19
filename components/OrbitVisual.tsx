@@ -1,6 +1,5 @@
 "use client";
 
-import { useEffect, useRef, useState } from "react";
 import { useReducedMotion, motion } from "framer-motion";
 
 interface OrbitItem {
@@ -43,29 +42,11 @@ function ringDots(radius: number, count: number) {
   });
 }
 
-const ORBIT_DURATION_MS = 90000;
-
 export function OrbitVisual() {
   const reduce = useReducedMotion();
   const outerDots = ringDots(OUTER_RING_RADIUS, 3);
   const midDots = ringDots(MID_RING_RADIUS, 2);
   const innerDots = ringDots(INNER_RING_RADIUS, 4);
-
-  const [orbitAngle, setOrbitAngle] = useState(0);
-  const rafRef = useRef<number>(0);
-
-  useEffect(() => {
-    if (reduce) return;
-    let start: number | null = null;
-    function tick(t: number) {
-      if (start === null) start = t;
-      const elapsed = (t - start) % ORBIT_DURATION_MS;
-      setOrbitAngle((elapsed / ORBIT_DURATION_MS) * 360);
-      rafRef.current = requestAnimationFrame(tick);
-    }
-    rafRef.current = requestAnimationFrame(tick);
-    return () => cancelAnimationFrame(rafRef.current);
-  }, [reduce]);
 
   return (
     <div
@@ -82,48 +63,51 @@ export function OrbitVisual() {
         height={SIZE}
         className="absolute inset-0"
       >
-        {/* Orbit rings — outer dashed, mid solid, inner dotted, all faint */}
+        {/* Orbit rings — outer dashed, mid solid, inner dotted */}
         <circle
           cx={CENTER}
           cy={CENTER}
           r={OUTER_RING_RADIUS}
           fill="none"
-          stroke="var(--line)"
+          stroke="var(--amber)"
           strokeWidth="1"
           strokeDasharray="4 6"
-          opacity="0.5"
+          opacity="0.32"
         />
         <circle
           cx={CENTER}
           cy={CENTER}
           r={MID_RING_RADIUS}
           fill="none"
-          stroke="var(--line)"
+          stroke="var(--amber)"
           strokeWidth="1"
-          opacity="0.4"
+          opacity="0.24"
         />
         <circle
           cx={CENTER}
           cy={CENTER}
           r={INNER_RING_RADIUS}
           fill="none"
-          stroke="var(--line)"
+          stroke="var(--amber)"
           strokeWidth="1"
           strokeDasharray="1.5 5"
-          opacity="0.35"
+          opacity="0.28"
         />
       </svg>
 
-      {/* Spokes + pulse dots + label pills — angle driven by JS orbitAngle, no rotate() ever applied to pills */}
+      {/* Spokes + pulse dots + label pills — the whole group spins as one
+          CSS-animated transform (GPU compositor, no React re-render);
+          label pills counter-rotate below so their text stays level */}
       <svg
         viewBox={`0 0 ${SIZE} ${SIZE}`}
         width={SIZE}
         height={SIZE}
-        className="absolute inset-0"
+        className={`absolute inset-0 ${reduce ? "" : "orbit-group-spin"}`}
+        style={{ transformOrigin: `${CENTER}px ${CENTER}px` }}
       >
         <defs>
           {ORBIT_ITEMS.map((item, i) => {
-            const angle = angleFor(i, ORBIT_ITEMS.length) + orbitAngle;
+            const angle = angleFor(i, ORBIT_ITEMS.length);
             const from = pointOnCircle(angle, SPHERE_RADIUS);
             const to = pointOnCircle(angle, LABEL_RADIUS);
             return (
@@ -145,7 +129,7 @@ export function OrbitVisual() {
 
         {/* Spokes: straight line from sphere edge to label, along the exact same angle */}
         {ORBIT_ITEMS.map((item, i) => {
-          const angle = angleFor(i, ORBIT_ITEMS.length) + orbitAngle;
+          const angle = angleFor(i, ORBIT_ITEMS.length);
           const from = pointOnCircle(angle, SPHERE_RADIUS);
           const to = pointOnCircle(angle, LABEL_RADIUS);
           return (
@@ -164,7 +148,7 @@ export function OrbitVisual() {
         {/* Travelling pulse dots along each spoke */}
         {!reduce &&
           ORBIT_ITEMS.map((item, i) => {
-            const angle = angleFor(i, ORBIT_ITEMS.length) + orbitAngle;
+            const angle = angleFor(i, ORBIT_ITEMS.length);
             const from = pointOnCircle(angle, SPHERE_RADIUS);
             const to = pointOnCircle(angle, LABEL_RADIUS);
             const dur = 3 + (i % 3) * 0.7;
@@ -188,32 +172,41 @@ export function OrbitVisual() {
           })}
       </svg>
 
-      {/* Label pills — position recalculated every frame from orbitAngle; the pill element itself never receives a rotate transform, so text is always level */}
-      {ORBIT_ITEMS.map((item, i) => {
-        const angle = angleFor(i, ORBIT_ITEMS.length) + orbitAngle;
-        const p = pointOnCircle(angle, LABEL_RADIUS);
-        return (
-          <div
-            key={item.label}
-            className="absolute -translate-x-1/2 -translate-y-1/2"
-            style={{ left: p.x, top: p.y }}
-          >
-            <motion.span
-              initial={reduce ? false : { opacity: 0, scale: 0.9 }}
-              whileInView={{ opacity: 1, scale: 1 }}
-              viewport={{ once: true }}
-              transition={{ duration: 0.4, delay: i * 0.06 }}
-              className="inline-flex items-center gap-2 whitespace-nowrap rounded-full border border-line bg-surface px-3.5 py-1.5 font-mono text-xs text-text shadow-lg shadow-black/20"
+      {/* Label pills — anchored at their static angle inside the same
+          spinning group as the spokes (orbit-group-spin), then each pill
+          counter-spins in place so its text stays level throughout */}
+      <div
+        className={`absolute inset-0 ${reduce ? "" : "orbit-group-spin"}`}
+        style={{ transformOrigin: `${CENTER}px ${CENTER}px` }}
+      >
+        {ORBIT_ITEMS.map((item, i) => {
+          const angle = angleFor(i, ORBIT_ITEMS.length);
+          const p = pointOnCircle(angle, LABEL_RADIUS);
+          return (
+            <div
+              key={item.label}
+              className="absolute -translate-x-1/2 -translate-y-1/2"
+              style={{ left: p.x, top: p.y }}
             >
-              <span
-                className="h-1.5 w-1.5 rounded-full bg-amber shadow-[0_0_6px_1px_rgba(245,184,65,0.5)]"
-                aria-hidden="true"
-              />
-              {item.label}
-            </motion.span>
-          </div>
-        );
-      })}
+              <motion.span
+                initial={reduce ? false : { opacity: 0, scale: 0.9 }}
+                whileInView={{ opacity: 1, scale: 1 }}
+                viewport={{ once: true }}
+                transition={{ duration: 0.4, delay: i * 0.06 }}
+                className={`inline-flex items-center gap-2 whitespace-nowrap rounded-full border border-line bg-surface px-3.5 py-1.5 font-mono text-xs text-text shadow-lg shadow-black/20 ${
+                  reduce ? "" : "orbit-group-spin-reverse"
+                }`}
+              >
+                <span
+                  className="h-1.5 w-1.5 rounded-full bg-amber shadow-[0_0_6px_1px_rgba(245,184,65,0.5)]"
+                  aria-hidden="true"
+                />
+                {item.label}
+              </motion.span>
+            </div>
+          );
+        })}
+      </div>
 
       {/* Outer ring dots — fastest, creates depth via speed contrast */}
       <div
@@ -293,10 +286,15 @@ export function OrbitVisual() {
           }}
         />
         <span
-          className="relative flex h-full w-full items-center justify-center font-display text-lg font-bold text-text"
+          className="display-sharp relative flex h-full w-full items-center justify-center font-display text-xl font-extrabold"
           style={{
-            letterSpacing: "0.01em",
-            textShadow: "0 1px 8px rgba(245,184,65,0.35)",
+            letterSpacing: "-0.01em",
+            background:
+              "linear-gradient(180deg, #fff6e0 0%, #f5b841 55%, #d99a2b 100%)",
+            WebkitBackgroundClip: "text",
+            backgroundClip: "text",
+            color: "transparent",
+            filter: "drop-shadow(0 1px 6px rgba(245,184,65,0.45))",
           }}
         >
           Mozahid
